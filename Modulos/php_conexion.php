@@ -1,6 +1,6 @@
 <?php
 	
-	$conexion = mysql_connect("localhost","root","");
+	$conexion = mysql_connect("localhost","root","1993");
 	mysql_select_db("papeleria",$conexion);
 	date_default_timezone_set("America/Bogota");
     mysql_query("SET NAMES utf8");
