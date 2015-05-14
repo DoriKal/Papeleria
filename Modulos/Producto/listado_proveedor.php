@@ -33,16 +33,7 @@
     <link rel="apple-touch-icon-precomposed" href="../../ico/apple-touch-icon-57-precomposed.png">
 	<link rel="shortcut icon" href="../../ico/favicon.png">
   </head>
-  <!-- FACEBOOK COMENTARIOS -->
-	<div id="fb-root"></div>
-	<script>(function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/es_LA/all.js#xfbml=1";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
-    <!-- FIN CODIGO FACEBOOK -->
+  <!-- -->
   <body>
 
     <?php include_once "../../menu/m_producto.php"; ?>
@@ -88,8 +79,8 @@
                                 <input type="text" name="tel" autocomplete="off" required value=""><br>
                             </div>
                             <div class="span6">
-                                <strong>Numero FAX</strong><br>
-                                <input type="text" name="fax" autocomplete="off" required value=""><br>
+                                <strong>Email</strong><br>
+                                <input type="email" name="fax" autocomplete="off" required value=""><br>
                                 <strong>Nota</strong><br>
                                 <input type="text" name="nota" autocomplete="off" required value=""><br>
                                 <strong>Contacto</strong><br>
@@ -173,8 +164,8 @@
                                 <input type="text" name="tel" autocomplete="off" required value="<?php echo $row['tel']; ?>"><br>
                             </div>
                             <div class="span6">
-                                <strong>Numero FAX</strong><br>
-                                <input type="text" name="fax" autocomplete="off" required value="<?php echo $row['fax']; ?>"><br>
+                                <strong>Email</strong><br>
+                                <input type="email" name="fax" autocomplete="off" required value="<?php echo $row['fax']; ?>"><br>
                                 <strong>Nota</strong><br>
                                 <input type="text" name="nota" autocomplete="off" required value="<?php echo $row['nota']; ?>"><br>
                                 <strong>Contacto</strong><br>

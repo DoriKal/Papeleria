@@ -66,16 +66,7 @@
     <link rel="apple-touch-icon-precomposed" href="../../ico/apple-touch-icon-57-precomposed.png">
 	<link rel="shortcut icon" href="../../ico/favicon.png">
   </head>
-  <!-- FACEBOOK COMENTARIOS -->
-	<div id="fb-root"></div>
-	<script>(function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/es_LA/all.js#xfbml=1";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
-    <!-- FIN CODIGO FACEBOOK -->
+  <!-- -->
   <body>
 
     <?php include_once "../../menu/m_producto.php"; ?>
@@ -109,10 +100,10 @@
 						$defecto=limpiar($_POST['defecto']);			$ivacompra=limpiar($_POST['idIva']);
 						$ivaventa=limpiar($_POST['idIva']);			$costo_prov=limpiar($_POST['costo_prov']);
 						$ocosto_prov=limpiar($_POST['ocosto_prov']);	$a_venta=limpiar($_POST['a_venta']);
-						$b_venta=limpiar($_POST['b_venta']);			$c_venta=limpiar($_POST['c_venta']);
-						$d_venta=limpiar($_POST['d_venta']);			$a_costo=limpiar($_POST['a_costo']);
-						$b_costo=limpiar($_POST['b_costo']);			$c_costo=limpiar($_POST['c_costo']);
-						$d_costo=limpiar($_POST['d_costo']);			$url=cadenas().encrypt($codigo,'URLCODIGO');
+						$b_venta=limpiar($_POST['b_venta']);			/*$c_venta=limpiar($_POST['c_venta']);*/
+						/*$d_venta=limpiar($_POST['d_venta']);*/			$a_costo=limpiar($_POST['a_costo']);
+						$b_costo=limpiar($_POST['b_costo']);			/*$c_costo=limpiar($_POST['c_costo']);*/
+						/*$d_costo=limpiar($_POST['d_costo']);*/			$url=cadenas().encrypt($codigo,'URLCODIGO');
 						
 						if(empty($_GET['codigo'])){
 							$pa=mysql_query("SELECT * FROM articulo WHERE codigo='$codigo'");				
@@ -189,8 +180,8 @@
                               <select name="defecto" class="input-xlarge">
                                 	<option value="A" <?php if($defecto=='A'){ echo 'selected'; } ?>>Precio A</option>
                                     <option value="B" <?php if($defecto=='B'){ echo 'selected'; } ?>>Precio B</option>
-                                    <option value="C" <?php if($defecto=='C'){ echo 'selected'; } ?>>Precio C</option>
-                                    <option value="D" <?php if($defecto=='D'){ echo 'selected'; } ?>>Precio D</option>
+                                    <!--option value="C" <?php if($defecto=='C'){ echo 'selected'; } ?>>Precio C</option-->
+                                    <!--option value="D" <?php if($defecto=='D'){ echo 'selected'; } ?>>Precio D</option-->
                                 </select>
                             </div>
                           <div class="span4">
@@ -231,14 +222,14 @@
                             	<strong>Costo Proveedor</strong><br>
                                 <div class="input-prepend input-append">
                                     <span class="add-on"><strong><?php echo $s; ?></strong></span>
-                                    <input type="number" name="costo_prov" min="0" value="<?php echo $costo_prov; ?>" autocomplete="off" required>
+                                    <input type="number" name="costo_prov" step="0.01" value="<?php echo $costo_prov; ?>" autocomplete="off" required>
                                 </div>
                             </div>
                             <div class="span4">
                             	<strong>Otros Costos</strong><br>
                                 <div class="input-prepend input-append">
                                     <span class="add-on"><strong><?php echo $s; ?></strong></span>
-	                                <input type="number" name="ocosto_prov" min="0" value="<?php echo $ocosto_prov; ?>" autocomplete="off" required>
+	                                <input type="number" name="ocosto_prov" step="0.01" value="<?php echo $ocosto_prov; ?>" autocomplete="off" required>
                                 </div>
                             </div>
                             <div class="span4">
@@ -284,29 +275,29 @@
                             <td>
                             	<div class="input-prepend input-append">
                                     <span class="add-on"><strong><?php echo $s; ?></strong></span>
-	                                <input type="number" name="b_venta" min="0" value="<?php echo $b_venta; ?>" autocomplete="off" required>
+	                                <input type="number" name="b_venta" step="0.01" value="<?php echo $b_venta; ?>" autocomplete="off" required>
                                 </div>
                             </td>
                             <td>
                             	<div class="input-prepend input-append">
                                 	<span class="add-on"><strong><?php echo $s; ?></strong></span>
-                       				<input type="number" name="b_costo" min="0" value="<?php echo $b_costo; ?>" autocomplete="off" required>
+                       				<input type="number" name="b_costo" step="0.01" value="<?php echo $b_costo; ?>" autocomplete="off" required>
                                 </div>
                             </td>
                             <td><?php echo $s.' '.formato($b_venta*$ivav); ?></td>
                           </tr>
-                          <tr>
+                          <!-- <tr>
                             <td><center><strong>C</strong></center></td>
                             <td>
                             	<div class="input-prepend input-append">
                                     <span class="add-on"><strong><?php echo $s; ?></strong></span>
-	                                <input type="number" name="c_venta" min="0" value="<?php echo $c_venta; ?>" autocomplete="off" required>
+	                                <input type="number" name="c_venta" step="0.01" value="<?php echo $c_venta; ?>" autocomplete="off" required>
                                 </div>
                             </td>
                             <td>
                             	<div class="input-prepend input-append">
                                     <span class="add-on"><strong><?php echo $s; ?></strong></span>
-	                                <input type="number" name="c_costo" min="0" value="<?php echo $c_costo; ?>" autocomplete="off" required>
+	                                <input type="number" name="c_costo" step="0.01" value="<?php echo $c_costo; ?>" autocomplete="off" required>
                                 </div>
                             </td>
                             <td><?php echo $s.' '.formato($c_venta*$ivav); ?></td>
@@ -316,17 +307,17 @@
                             <td>
                             	<div class="input-prepend input-append">
                                     <span class="add-on"><strong><?php echo $s; ?></strong></span>
-	                                <input type="number" name="d_venta" min="0" value="<?php echo $d_venta; ?>" autocomplete="off" required>
+	                                <input type="number" name="d_venta" step="0.01" value="<?php echo $d_venta; ?>" autocomplete="off" required>
                                 </div>
                             </td>
                             <td>
                             	<div class="input-prepend input-append">
                                     <span class="add-on"><strong><?php echo $s; ?></strong></span>
-	                                <input type="number" name="d_costo" min="0" value="<?php echo $d_costo; ?>" autocomplete="off" required>
+	                                <input type="number" name="d_costo" step="0.01" value="<?php echo $d_costo; ?>" autocomplete="off" required>
                                 </div>
                             </td>
                             <td><?php echo $s.' '.formato($d_venta*$ivav); ?></td>
-                          </tr>
+                          </tr> -->
                         </table>
                         <br>
                         <div class="form-actions" align="center">

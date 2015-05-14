@@ -48,16 +48,7 @@
     <link rel="apple-touch-icon-precomposed" href="../../ico/apple-touch-icon-57-precomposed.png">
 	<link rel="shortcut icon" href="../../ico/favicon.png">
   </head>
-  <!-- FACEBOOK COMENTARIOS -->
-	<div id="fb-root"></div>
-	<script>(function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/es_LA/all.js#xfbml=1";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
-    <!-- FIN CODIGO FACEBOOK -->
+  <!-- -->
   <body>
 
     <?php include_once "../../menu/m_producto.php"; ?>
@@ -107,7 +98,7 @@
                                 <input type="text" name="tel" autocomplete="off" required><br>
                             </div>
                             <div class="span6">
-                            	<strong>Numero FAX</strong><br>
+                            	<strong>Email</strong><br>
                                 <input type="text" name="fax" autocomplete="off" required><br>
                                 <strong>Nota</strong><br>
                                 <input type="text" name="nota" autocomplete="off" required><br>
@@ -196,7 +187,7 @@
                     <td><strong>Nombre Proveedor</strong></td>
                     <td><strong>Direccion</strong></td>
                     <td><strong>Telefonos</strong></td>
-                    <td><strong>FAX</strong></td>
+                    <td><strong>Email</strong></td>
                     <td><strong>Contacto</strong></td>
                   </tr>
                   <?php

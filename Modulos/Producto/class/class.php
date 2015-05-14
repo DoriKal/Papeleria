@@ -49,34 +49,34 @@ class Proceso_Contenido{
 class Proceso_Producto{
 	var $codigo;       	var $nombre;      	var $depart;   		var $unidad;		var $defecto;  
 	var $ivacompra;		var $ivaventa;		var $costo_prov;	var $ocosto_prov;
-	var $a_venta;		var $b_venta;		var $c_venta;		var $d_venta;
-	var $a_costo;		var $b_costo;		var $c_costo;		var $d_costo;
+	var $a_venta;		var $b_venta;		/*var $c_venta;		var $d_venta;*/
+	var $a_costo;		var $b_costo;		/*var $c_costo;		var $d_costo;*/
 	
-	function __construct($codigo, $nombre, $depart, $unidad, $defecto, $ivacompra, $ivaventa, $costo_prov, $ocosto_prov, $a_venta, $b_venta, $c_venta, $d_venta, $a_costo, $b_costo, $c_costo, $d_costo){
+	function __construct($codigo, $nombre, $depart, $unidad, $defecto, $ivacompra, $ivaventa, $costo_prov, $ocosto_prov, $a_venta, $b_venta/*, $c_venta, $d_venta*/, $a_costo, $b_costo /*$c_costo, $d_costo*/){
 		
 		$this->codigo=$codigo;			$this->nombre=$nombre;		$this->depart=$depart;			$this->unidad=$unidad;	$this->defecto=$defecto;
 		$this->ivacompra=$ivacompra;	$this->ivaventa=$ivaventa;	$this->costo_prov=$costo_prov;	$this->ocosto_prov=$ocosto_prov;		
-		$this->a_venta=$a_venta;		$this->b_venta=$b_venta;	$this->c_venta=$c_venta;		$this->d_venta=$d_venta;
-		$this->a_costo=$a_costo;		$this->b_costo=$b_costo;	$this->c_costo=$c_costo;		$this->d_costo=$d_costo;		      
+		$this->a_venta=$a_venta;		$this->b_venta=$b_venta;	/*$this->c_venta=$c_venta;		$this->d_venta=$d_venta;*/
+		$this->a_costo=$a_costo;		$this->b_costo=$b_costo;	/*$this->c_costo=$c_costo;		$this->d_costo=$d_costo;*/		      
 	}
 	
 	function crear(){
 		$codigo=$this->codigo;			$nombre=$this->nombre;		$depart=$this->depart;			$unidad=$this->unidad;	$defecto=$this->defecto;
 		$ivacompra=$this->ivacompra;	$ivaventa=$this->ivaventa;	$costo_prov=$this->costo_prov;	$ocosto_prov=$this->ocosto_prov;
-		$a_venta=$this->a_venta;		$b_venta=$this->b_venta;	$c_venta=$this->c_venta;		$d_venta=$this->d_venta;
-		$a_costo=$this->a_costo;		$b_costo=$this->b_costo;	$c_costo=$this->c_costo;		$d_costo=$this->d_costo;
+		$a_venta=$this->a_venta;		$b_venta=$this->b_venta;	/*$c_venta=$this->c_venta;		$d_venta=$this->d_venta;*/
+		$a_costo=$this->a_costo;		$b_costo=$this->b_costo;	/*$c_costo=$this->c_costo;		$d_costo=$this->d_costo;*/
 		
 		mysql_query("INSERT INTO articulo 
 		(codigo, nombre, departamento_idDepartamento, unidad_idUnidad, defecto,iva_ivacompra, iva_ivaventa, costo_prov, ocosto_prov, 
-			a_venta, b_venta, c_venta, d_venta, a_costo, b_costo, c_costo, d_costo) 
+			a_venta, b_venta, a_costo, b_costo) 
 		VALUES ('$codigo','$nombre','$depart','$unidad','$defecto','$ivacompra','$ivaventa','$costo_prov','$ocosto_prov',
-			'$a_venta','$b_venta','$c_venta','$d_venta','$a_costo','$b_costo','$c_costo','$d_costo')");
+			'$a_venta','$b_venta','$a_costo','$b_costo')");
 	}
 	function actualizar(){
 		$codigo=$this->codigo;			$nombre=$this->nombre;		$depart=$this->depart;			$unidad=$this->unidad;	$defecto=$this->defecto;
 		$ivacompra=$this->ivacompra;	$ivaventa=$this->ivaventa;	$costo_prov=$this->costo_prov;	$ocosto_prov=$this->ocosto_prov;
-		$a_venta=$this->a_venta;		$b_venta=$this->b_venta;	$c_venta=$this->c_venta;		$d_venta=$this->d_venta;
-		$a_costo=$this->a_costo;		$b_costo=$this->b_costo;	$c_costo=$this->c_costo;		$d_costo=$this->d_costo;
+		$a_venta=$this->a_venta;		$b_venta=$this->b_venta;	/*$c_venta=$this->c_venta;		$d_venta=$this->d_venta;*/
+		$a_costo=$this->a_costo;		$b_costo=$this->b_costo;	/*$c_costo=$this->c_costo;		$d_costo=$this->d_costo;*/
 		mysql_query("UPDATE articulo SET nombre='$nombre', 
 										departamento_idDepartamento='$depart',
 										unidad_idUnidad='$unidad',
@@ -87,12 +87,8 @@ class Proceso_Producto{
 										ocosto_prov='$ocosto_prov',
 										a_venta='$a_venta',
 										b_venta='$b_venta',
-										c_venta='$c_venta',
-										d_venta='$d_venta',
 										a_costo='$a_costo',
-										b_costo='$b_costo',
-										c_costo='$c_costo',
-										d_costo='$d_costo'
+										b_costo='$b_costo'
 								WHERE codigo='$codigo'");		
 	}
 }

@@ -33,16 +33,7 @@
     <link rel="apple-touch-icon-precomposed" href="../../ico/apple-touch-icon-57-precomposed.png">
 	<link rel="shortcut icon" href="../../ico/favicon.png">
   </head>
-  <!-- FACEBOOK COMENTARIOS -->
-	<div id="fb-root"></div>
-	<script>(function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/es_LA/all.js#xfbml=1";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
-    <!-- FIN CODIGO FACEBOOK -->
+  <!-- -->
   <body>
     <?php include_once "../../menu/m_cliente.php"; ?>
     <DIV align="center">
