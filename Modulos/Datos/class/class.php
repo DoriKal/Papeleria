@@ -28,22 +28,25 @@ class Proceso_Deposito{
 	}
 }
 class Proceso_Departamento{
-	var $id;	var $nombre;	var $estado; var $empresa;	
+	var $id;	var $nombreDepartamento;	var $estado; var $empresa_idEmpresa1;	
 	
-	function __construct($id,$nombre,$estado, $empresa){
-		$this->id=$id;	$this->nombre=$nombre;	$this->estado=$estado; $this->empresa=$empresa;
+	function __construct($id,$nombreDepartamento,$estado, $empresa_idEmpresa1){
+		$this->id=$id;	$this->nombreDepartamento=$nombreDepartamento;	$this->estado=$estado; $this->empresa_idEmpresa1=$empresa_idEmpresa1;
 	}
 	
 	function crear(){
-		$id=$this->id;	$nombre=$this->nombre;	$estado=$this->estado; $empresa=$this->empresa;
+		$id=$this->id;	$nombreDepartamento=$this->nombreDepartamento;	$estado=$this->estado; $empresa_idEmpresa1=$this->empresa_idEmpresa1;
 		
-		mysql_query("INSERT INTO departamento (nombreDepartamento, estado,empresa_idEmpresa1) VALUES ('$nombre','$estado',$empresa);");
+		mysql_query("INSERT INTO departamento (nombreDepartamento, estado,empresa_idEmpresa1) VALUES ('$nombre','$estado',$empresa_idEmpresa1)");
 	}
 	
 	function actualizar(){
-		$id=$this->id;	$nombre=$this->nombre;	$estado=$this->estado; $empresa=$this->empresa;
-		echo $id."ddsfnklsdnfklsn";
-		//mysql_query("UPDATE departamento SET nombreDepartamento='$nombre', estado='$estado' empresa_idEmpresa1='$empresa' WHERE idDepartamento='$id'");
+		$id=$this->id;	$nombreDepartamento=$this->nombreDepartamento;	$estado=$this->estado; $empresa_idEmpresa1=$this->empresa_idEmpresa1;
+		mysql_query("UPDATE departamento 
+					SET nombreDepartamento='$nombreDepartamento', 
+						estado='$estado',
+						empresa_idEmpresa1=$empresa_idEmpresa1
+					WHERE idDepartamento=$id");
 	}
 }
 

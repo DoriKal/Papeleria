@@ -57,7 +57,7 @@
             	<table class="table table-bordered">
                   <tr class="well">
                     <td>
-                    	<h2 align="center">Inventario [<?php echo $nombre_producto; ?>]</h2>
+                    	<h2 align="center">Inventario [<?php echo strtoupper($nombre_producto); ?>]</h2>
                         <?php 
 							if($existe==TRUE){ 
 							$url1=cadenas().encrypt($id_codigo,'URLCODIGO');
@@ -74,7 +74,7 @@
                   </tr>
                 </table>
                 <div align="right">
-                	<a href="#nuevo" role="button" class="btn" data-toggle="modal"><strong>Ingresar Producto en Deposito</strong></a>
+                	<a href="#nuevo" role="button" class="btn" data-toggle="modal"><strong>Ingresar Producto en Almacen</strong></a>
                 </div>
                 
                 <div id="nuevo" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -84,8 +84,8 @@
 	                    <h3 id="myModalLabel">Ingresar</h3>
                     </div>
                     <div class="modal-body">
-						<strong>Producto: </strong><?php echo $nombre_producto; ?><br><br>
-                        <strong>Deposito</strong><br>
+						<strong>Producto: </strong><?php echo strtoupper($nombre_producto); ?><br><br>
+                        <strong>Almacen</strong><br>
                       <select name="deposito" class="input-xlarge" >
                         	<?php
 								$pa=mysql_query("SELECT * FROM sucursal WHERE estado='s'");				
@@ -101,7 +101,7 @@
                   </div>
                     <div class="modal-footer">
                         <button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i> <strong>Cerrar</strong></button>
-                        <button class="btn btn-primary"><i class="icon-ok"></i> <strong>Ingresar a Deposito</strong></button>
+                        <button class="btn btn-primary"><i class="icon-ok"></i> <strong>Ingresar a Almacen</strong></button>
                     </div>
                     </form>
                 </div>
@@ -109,7 +109,7 @@
                 <table class="table table-bordered">
                   <tr>
                     <td>
-                    	<center><pre><strong>Listado de Existencia por Deposito</strong></pre></center>
+                    	<center><pre><strong>Listado de Existencia por Almacen</strong></pre></center>
                         <?php 
 							if(!empty($_POST['cant'])){
 								$cant=limpiar($_POST['cant']);
@@ -120,18 +120,18 @@
 								if(empty($_POST['id'])){
 									$pa=mysql_query("SELECT * FROM pedido WHERE articulo_codigo='$id_codigo' AND deposito_idDeposito='$deposito'");				
 									if($row=mysql_fetch_array($pa)){
-										echo mensajes('El Producto "'.$nombre_producto.'" Ya se Encuentra en el Deposito "'.$nom_depo.'"','rojo');
+										echo mensajes('El Producto "'.$nombre_producto.'" Ya se Encuentra en el Almacen "'.$nom_depo.'"','rojo');
 									}else{
 										$oDeposito=new Proceso_Contenido('',$deposito,$cant,$minima,$id_codigo);
 										$oDeposito->crear();
 										echo mensajes('El Producto "'.$nombre_producto.'" 
-										Ha sido Ingresado con Exito en el Deposito "'.$nom_depo.'"','verde');
+										Ha sido Ingresado con Exito en el Almacen "'.$nom_depo.'"','verde');
 									}
 								}else{
 									$id=limpiar($_POST['id']);
 									$oDeposito=new Proceso_Contenido($id,$deposito,$cant,$minima,$id_codigo);
 									$oDeposito->actualizar();
-									echo mensajes('El Producto "'.$nombre_producto.'" en el Deposito "'.$nom_depo.'" Actualizado con Exito','verde');
+									echo mensajes('El Producto "'.$nombre_producto.'" en el Almacen "'.$nom_depo.'" Actualizado con Exito','verde');
 								}
 								
 							}
@@ -146,7 +146,7 @@
                             <td></td>
                           </tr>
                           <?php
-						  	$pa=mysql_query("SELECT * FROM pedido WHERE articulo_codigo='$id_codigo'");				
+						  	$pa=mysql_query("SELECT * FROM pedido p INNER JOIN articulo a ON p.articulo_codigo=a.codigo WHERE articulo_codigo=$id_codigo");				
 							while($row=mysql_fetch_array($pa)){
 								$oDepor=new Consultar_Deposito($row['deposito_idDeposito']);
 								$oProducto=new Consultar_Producto($row['articulo_codigo']);

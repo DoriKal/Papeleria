@@ -16,7 +16,6 @@
 		$id_doc=limpiar($_GET['doc']);
 		$id_doc=substr($id_doc,10);
 		$id_doc=decrypt($id_doc,'URLCODIGO');
-		echo $id_doc;
 		$pa=mysql_query("SELECT * FROM 
 (persona INNER JOIN empleado ON persona.idPersona=empleado.persona_idPersona) 
 INNER JOIN cajero ON empleado.idUsuario=cajero.usuario_idUsuario3
@@ -73,9 +72,7 @@ WHERE empleado.usu='$id_doc' and persona.doc='$id_doc'");
 							$sexo=limpiar($_POST['sexo']);		$dir=limpiar($_POST['dir']);		$nota=limpiar($_POST['nota']);
 							$fechar=date('Y-m-d');				$estado=limpiar($_POST['estado']);	$tipo=limpiar($_POST['tipo']);
 							$correo=limpiar($_POST['correo']);	$con=$doc;							$url=cadenas().encrypt($doc,'URLCODIGO');
-							$deposito=limpiar($_POST['deposito_idDeposito3']);   $empresa=limpiar($_POST['empresa_idEmpresa']);
-									
-                  echo $doc;			
+							$deposito=limpiar($_POST['deposito_idDeposito3']);   $empresa=limpiar($_POST['empresa_idEmpresa']);			
 							$oConsultar=new Consultar_Usuario($doc);
 							$oAlumno=new Proceso_Usuario($doc,$nom,$ape,$fecha,$tel,$cel,$sexo,$dir,$nota,$fechar,$estado,$correo,$con,$tipo,$deposito,$empresa);
 														
@@ -149,7 +146,7 @@ WHERE empleado.usu='$id_doc' and persona.doc='$id_doc'");
                         	<form name="form1" enctype="multipart/form-data" method="post" action="">
                        		<div class="row-fluid">
 	                            <div class="span4">
-                                	<strong>Documento / Identidad</strong><br>
+                                	<strong>Código / ID</strong><br>
                                     <input type="text" name="doc" autocomplete="off" <?php if($existe==TRUE){ echo 'readonly'; }else{ echo 'required'; } ?>   value="<?php echo $doc; ?>" class="input-xlarge"><br>
                                 	<strong>Nombres</strong><br>
                                     <input type="text" name="nom" autocomplete="off" required value="<?php echo $nom; ?>" class="input-xlarge"><br>
@@ -160,7 +157,7 @@ WHERE empleado.usu='$id_doc' and persona.doc='$id_doc'");
                                     	<option value="m" <?php if($sexo=='m'){ echo 'selected'; } ?>>Masculino</option>
                                         <option value="f" <?php if($sexo=='f'){ echo 'selected'; } ?>>Femenino</option>
                                     </select><br>
-                                    <strong>Estado</strong><br>
+                                    <strong>Status</strong><br>
                                     <select name="estado" class="input-xlarge">
                                     	<option value="s" <?php if($estado=='s'){ echo 'selected'; } ?>>ACTIVO</option>
                                         <option value="n" <?php if($estado=='n'){ echo 'selected'; } ?>>NO ACTIVO</option>

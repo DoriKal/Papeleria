@@ -107,7 +107,7 @@
                                         <td><strong><center>ID</center></strong></td>
                                         <td><strong>Descripcion</strong></td>
                                         <td><strong><center>Valor</center></strong></td>
-                                        <td><strong><center>Estado</center></strong></td>
+                                        <td><strong><center>Status</center></strong></td>
                                         <td><strong><center>Editar</center></strong></td>
                                       </tr>
                                       <?php
@@ -149,7 +149,7 @@
                                                     <input name="valor" value="0" type="number" min="0" max="100">
                                                     <span class="add-on"><strong>%</strong></span>
                                                 </div><br>
-                                                <strong>Estado</strong><br>
+                                                <strong>Status</strong><br>
                                                 <select name="estado">
                                                 	<option value="s" <?php if($estado_iva=='s'){ echo 'selected'; } ?>>ACTIVO</option>
                                                     <option value="n" <?php if($estado_iva=='n'){ echo 'selected'; } ?>>NO ACTIVO</option>

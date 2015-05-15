@@ -47,7 +47,7 @@
                         	<tr>
                             	<td>
                                 	<center>
-                                        <h2> Administrar<br>IVA </h2>
+                                        <h2>Impuestos </h2>
                                         <img src="../../img/logo.png"><br><br>
                                         <a class="btn btn-large" href="iva.php"><strong>Entrar</strong></a><br><br>
                                     </center>
@@ -60,7 +60,7 @@
                         	<tr>
                             	<td>
                                 	<center>
-                                        <h2> Administrar Datos Empresa </h2>
+                                        <h2>Datos Empresa </h2>
                                         <img src="../../img/logo.png"><br><br>
                                         <a class="btn btn-large" href="empresa.php"><strong>Entrar</strong></a><br><br>
                                     </center>
@@ -73,7 +73,7 @@
                         	<tr>
                             	<td>
                                 	<center>
-                                        <h2> Administrar Departamentos </h2>
+                                        <h2>Departamentos </h2>
                                         <img src="../../img/logo.png"><br><br>
                                         <a class="btn btn-large" href="departamento.php"><strong>Entrar</strong></a><br><br>
                                     </center>

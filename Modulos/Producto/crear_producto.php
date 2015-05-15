@@ -77,7 +77,7 @@
             	<table class="table table-bordered">
                   <tr class="well">
                     <td>
-                    	<h1 align="center"><?php echo $titulo; ?></h1>
+                    	<h1 align="center"><?php echo strtoupper($titulo); ?></h1>
                         <?php 
             							if($existe==TRUE){ 
             							$url1=cadenas().encrypt($id_codigo,'URLCODIGO');
@@ -135,15 +135,15 @@
                             <input type="text" name="codigo" <?php if($existe==TRUE){ echo 'readonly';}else{ echo 'required'; } ?>  class="input-xlarge" autocomplete="off" value="<?php echo $codigo; ?>"><br>
                           </div>
                           <div class="span6" align="center">
-                          	<strong>Nombre del Producto</strong><br>
+                          	<strong>Descripción Producto</strong><br>
                             <input type="text" name="nombre" class="input-xxlarge" autocomplete="off" required value="<?php echo $nombre; ?>"><br>
                           </div>
                         </div>
                         
                    		<div class="row-fluid">
                           <div class="span6" align="center">
-                            <strong>Departamento</strong><br>
-							<select name="idDepartamento" class="input-xlarge">
+                            <strong>Clasificación</strong><br>
+							               <select name="idDepartamento" class="input-xlarge">
                                 	<?php
                   										$pa=mysql_query("SELECT * FROM departamento WHERE estado='s'");				
                                       					while($row=mysql_fetch_array($pa)){
@@ -173,10 +173,10 @@
                             </div>
 					    </div>
                         
-                        <div align="center"><pre><strong>Configuracion del IVA</strong></pre></div>
+                        <div align="center"><pre><strong>Impuestos</strong></pre></div>
                         <div class="row-fluid">
                         	<div class="span4">
-                            	<strong>Precio por Defecto</strong><br>
+                            	<strong>Precio de venta</strong><br>
                               <select name="defecto" class="input-xlarge">
                                 	<option value="A" <?php if($defecto=='A'){ echo 'selected'; } ?>>Precio A</option>
                                     <option value="B" <?php if($defecto=='B'){ echo 'selected'; } ?>>Precio B</option>
@@ -188,15 +188,15 @@
                             	<strong>IVA Compra</strong><br>
                             <select name="idIva" class="input-xlarge">
                                 	<?php
-										$pa=mysql_query("SELECT * FROM iva WHERE estado='s'");				
-                    					while($row=mysql_fetch_array($pa)){
-											if($row['idIva']==$ivacompra){
-												echo '<option value="'.$row['idIva'].'" selected>'.$row['nombreIva'].'</option>';	
-											}else{
-												echo '<option value="'.$row['idIva'].'">'.$row['nombreIva'].'</option>';	
-											}
-										}
-									?>
+                    								$pa=mysql_query("SELECT * FROM iva WHERE estado='s'");				
+                                    					while($row=mysql_fetch_array($pa)){
+                    									if($row['idIva']==$ivacompra){
+                    										echo '<option value="'.$row['idIva'].'" selected>'.$row['nombreIva'].'</option>';	
+                    									}else{
+                    										echo '<option value="'.$row['idIva'].'">'.$row['nombreIva'].'</option>';	
+                    									}
+                    								}
+                    							?>
                               </select>
                           </div>
                           <div class="span4">

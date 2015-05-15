@@ -13,7 +13,7 @@
 <html lang="es">
   <head>
     <meta charset="utf-8">
-    <title>Listado de Proveedores</title>
+    <title>Lista de Proveedores</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -44,7 +44,7 @@
             	<table class="table table-bordered">
                   <tr class="well">
                     <td>
-                   	 	<h1 align="center">listado de Proveedores</h1>
+                   	 	<h1 align="center">Lista de Proveedores</h1>
                         <center>
                       	<form name="form3" method="post" action="" class="form-search">
                         	<div class="input-prepend input-append">
@@ -59,7 +59,7 @@
                   </tr>
                 </table>
                 <div align="right">
-	                <a href="#nuevo" role="button" class="btn" data-toggle="modal"><strong>Crear Nuevo Proveedor</strong></a>
+	                <a href="#nuevo" role="button" class="btn" data-toggle="modal"><strong>Nuevo Proveedor</strong></a>
                 </div>
                 
                 <div id="nuevo" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -119,7 +119,7 @@
                     <td><strong>Nombre Proveedor</strong></td>
                     <td><strong>Direccion</strong></td>
                     <td><strong>Telefono</strong></td>
-                    <td><strong>FAX</strong></td>
+                    <td><strong>Email</strong></td>
                     <td><strong>Contacto</strong></td>
                     <td></td>
                   </tr>

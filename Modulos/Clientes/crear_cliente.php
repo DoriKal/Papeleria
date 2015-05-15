@@ -146,7 +146,7 @@
                         	<form name="form1" enctype="multipart/form-data" method="post" action="">
                        		<div class="row-fluid">
 	                            <div class="span4">
-                                	<strong>Documento / Identidad</strong><br>
+                                	<strong>Código / ID</strong><br>
                                     <input type="text" name="doc" autocomplete="off" <?php if($existe==TRUE){ echo 'readonly'; }else{ echo 'required'; } ?>   value="<?php echo $doc; ?>" class="input-xlarge"><br>
                                 	<strong>Nombres</strong><br>
                                     <input type="text" name="nom" autocomplete="off" required value="<?php echo $nom; ?>" class="input-xlarge"><br>
@@ -157,7 +157,7 @@
                                     	<option value="m" <?php if($sexo=='m'){ echo 'selected'; } ?>>Masculino</option>
                                         <option value="f" <?php if($sexo=='f'){ echo 'selected'; } ?>>Femenino</option>
                                     </select><br>
-                                    <strong>Estado</strong><br>
+                                    <strong>Status</strong><br>
                                     <select name="estado" class="input-xlarge">
                                     	<option value="s" <?php if($estado=='s'){ echo 'selected'; } ?>>ACTIVO</option>
                                         <option value="n" <?php if($estado=='n'){ echo 'selected'; } ?>>NO ACTIVO</option>

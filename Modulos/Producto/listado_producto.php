@@ -14,7 +14,7 @@
 <html lang="es">
   <head>
     <meta charset="utf-8">
-    <title>Listo de Producto</title>
+    <title>Lista de Productos</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -45,13 +45,13 @@
             	<table class="table table-bordered">
                   <tr class="well">
                     <td>
-                    	<h1 align="center">Listado de Productos</h1>
+                    	<h1 align="center">Lista de Productos</h1>
                         <center>
                       	<form name="form3" method="post" action="" class="form-search">
                         	<div class="input-prepend input-append">
 								<span class="add-on"><i class="icon-search"></i></span>
                         		<input type="text" name="buscar" autocomplete="off" class="input-xxlarge search-query" 
-                                autofocus placeholder="Buscar Proveedor por Nombre">
+                                autofocus placeholder="Buscar Producto por Nombre">
                             </div>
                             <button type="submit" class="btn" name="buton"><strong>Buscar</strong></button>
                     	</form>
@@ -66,22 +66,52 @@
                 <table class="table table-bordered">
                   <tr class="well">
                     <td><strong>Codigo</strong></td>
-                    <td><strong>Nombre del Producto</strong></td>
+                    <td><strong>Descripción</strong></td>
+                    <td><strong>Clasificación</strong></td>
+                    <td><strong>Impuesto </strong></td>
+                    <td><strong>Precio Compra</strong></td>
+                    <td><strong>Precio Venta </strong></td>
                     <td></td>
                   </tr>
                   <?php
-				  	if(!empty($_POST['buscar'])){
-						$buscar=limpiar($_POST['buscar']);
-						$pame=mysql_query("SELECT * FROM articulo WHERE nombre LIKE '%$buscar%' or codigo='$buscar' ORDER BY nombre");	
-					}else{
-						$pame=mysql_query("SELECT * FROM articulo ORDER BY nombre");		
-					}		
-					while($row=mysql_fetch_array($pame)){
-						$url=cadenas().encrypt($row['codigo'],'URLCODIGO');
-				  ?>
+				  	        if(!empty($_POST['buscar'])){
+						          $buscar=limpiar($_POST['buscar']);
+						            $pame=mysql_query("SELECT * FROM articulo WHERE nombre LIKE '%$buscar%' or codigo='$buscar' ORDER BY nombre");	
+					          }else{
+						          $pame=mysql_query("SELECT * FROM articulo ORDER BY nombre");		
+          					}		
+          					while($row1=mysql_fetch_array($pame)){
+          						$url=cadenas().encrypt($row1['codigo'],'URLCODIGO');
+          				  ?>
                   <tr>
-                    <td><?php echo $row['codigo']; ?></td>
-                    <td><?php echo $row['nombre']; ?></td>
+                    <td><center><?php echo $row1['codigo']; ?></center></td>
+                    <td><?php echo strtoupper($row1['nombre']); ?></td>
+                    <td>
+                      <?php
+                      $idDepa = $row1['departamento_idDepartamento'];
+                        $pa=mysql_query("SELECT * FROM departamento WHERE estado='s' AND idDepartamento = $idDepa");       
+                          while($row=mysql_fetch_array($pa)){
+                          if($row['idDepartamento']==$row1['departamento_idDepartamento']){
+                            echo strtoupper($row['nombreDepartamento']); 
+                          }
+                        }
+                      ?>
+                    </td>
+                    <td>
+                      <?php
+                        $idIva = $row1['iva_ivaventa'];
+                        $pa=mysql_query("SELECT * FROM iva WHERE estado='s' AND idIva=$idIva");        
+                                  while($row=mysql_fetch_array($pa)){
+                          if($row['idIva']==$idIva){
+                            echo strtoupper($row['nombreIva']); 
+                          }else{
+                            echo strtoupper($row['nombreIva']);  
+                          }
+                        }
+                      ?>
+                    </td>
+                    <td><center><?php echo "$ ".number_format($row1['a_costo'], 2, '.', ''); ?></center></td>
+                    <td><center><?php echo "$ ".number_format($row1['a_venta'], 2, '.', ''); ?></center></td>
                     <td>
                     	<center>
                             <a class="btn btn-mini" href="crear_producto.php?codigo=<?php echo $url; ?>" title="Editar">

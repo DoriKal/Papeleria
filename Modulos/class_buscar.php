@@ -36,7 +36,7 @@ class Consultar_Departamento{
 	private $fetch;
 	
 	function __construct($codigo){
-		$this->consulta = mysql_query("SELECT * FROM departamento d INNER JOIN empresa e on d.empresa_idEmpresa1=e.idEmpresa WHERE idDepartamento='$codigo'");
+		$this->consulta = mysql_query("SELECT * FROM departamento d INNER JOIN empresa e on d.empresa_idEmpresa1=e.idEmpresa WHERE idDepartamento=$codigo");
 		$this->fetch = mysql_fetch_array($this->consulta);
 	}
 	
@@ -108,10 +108,11 @@ class Consultar_Producto{
 	
 	function __construct($codigo){
 		$this->consulta = 
-		mysql_query("SELECT * FROM ((articulo a INNER JOIN iva i ON a.iva_ivacompra=i.idIva) 
+		mysql_query("SELECT * FROM (((articulo a INNER JOIN iva i ON a.iva_ivacompra=i.idIva) 
 						INNER JOIN unidad u ON a.unidad_idUnidad=u.idUnidad) 
-						INNER JOIN departamento d ON a.departamento_idDepartamento=d.idDepartamento
-						WHERE codigo='$codigo' or nombre='$codigo'");
+						INNER JOIN departamento d ON a.departamento_idDepartamento=d.idDepartamento)
+						INNER JOIN pedido p ON p.articulo_codigo=a.codigo
+						WHERE codigo='$codigo' or nombre='$codigo' or a_costo='$codigo'");
 		$this->fetch = mysql_fetch_array($this->consulta);
 	}
 	

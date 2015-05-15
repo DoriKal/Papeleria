@@ -11,9 +11,7 @@
 	if(!empty($_GET['id'])){
 		$id_depa=limpiar($_GET['id']);
 		$id_depa=substr($id_depa,10);
-		$id_depa=decrypt($id_depa,'URLIVACODIGO');
-    
-		
+		$id_depa=decrypt($id_depa,'URLCODIGO');
 		$oDepa=new Consultar_Departamento($id_depa);
 		if($oDepa->consultar("nombreDepartamento")==NULL){
 			header('Location: departamento.php');	
@@ -82,25 +80,25 @@
                   </tr>
                 </table>
                 <?php 
-					if(!empty($_POST['nombre'])){
-						$id=limpiar($_POST['idDepartamento']);
-						$nombre=limpiar($_POST['nombreDepartamento']);
-						$estado=limpiar($_POST['estado']);
-            $idEmpresa=limpiar($_POST['idEmpresa']);
-
-						$overty=new Consultar_Departamento($id);
-						if($overty->consultar('nombreDepartamento')==NULL){
-							$oGuardar=new Proceso_Departamento('',$nombre,$estado, $idEmpresa);
-							$oGuardar->crear();
-							echo mensajes('Nuevo Departamento "'.$nombre.'" Registrado con Exito','verde');
-						}else{
-							$oActualizar=new Proceso_Departamento($id,$nombre,$estado, $idEmpresa);
-							$oActualizar->actualizar();
-              var_dump($oActualizar);
-							echo mensajes('Nuevo Departamento "'.$nombre.'" Actualizado con Exito','verde');
-						}
-					}
-				?>
+      					if(!empty($_POST['nombreDepartamento'])){
+      						$id=limpiar($_POST['idDepartamento']);
+      						$nombre=limpiar($_POST['nombreDepartamento']);
+      						$estado=limpiar($_POST['estado']);
+                  $idEmpresa=limpiar($_POST['idEmpresa']);
+                  print_r($id);
+      						$overty=new Consultar_Departamento($id);
+      						if($overty->consultar('nombreDepartamento')==NULL){
+      							$oGuardar=new Proceso_Departamento('',$nombre,$estado, $idEmpresa);
+      							$oGuardar->crear();
+      							echo mensajes('Departamento "'.$nombre.'" Registrado con Exito','verde');
+      						}else{
+      							$oActualizar=new Proceso_Departamento($id,$nombre,$estado, $idEmpresa);
+      							$oActualizar->actualizar();
+      							echo mensajes('Departamento "'.$nombre.'" Actualizado con Exito','verde');
+                    header('Location: departamento.php'); 
+      						}
+      					}
+      				?>
                 <table class="table table-bordered">
                 	<tr>
                     	<td>
@@ -110,14 +108,14 @@
                                       <tr class="well">
                                         <td><strong><center>ID</center></strong></td>
                                         <td><strong>Descripcion</strong></td>
-                                        <td><strong><center>Estado</center></strong></td>
+                                        <td><strong><center>Status</center></strong></td>
                                         <td><strong><center>Empresa</center></strong></td>
                                         <td><strong><center>Editar</center></strong></td>
                                       </tr>
                                       <?php
                   									  	$pame=mysql_query("SELECT * from departamento d INNER JOIN empresa e ON e.idEmpresa=d.empresa_idEmpresa1  ORDER BY idDepartamento");			
                   										while($row=mysql_fetch_array($pame)){
-                  											$url=cadenas().encrypt($row['idDepartamento'],'URLIVACODIGO');
+                  											$url=cadenas().encrypt($row['idDepartamento'],'URLCODIGO');
                   									  ?>
                                       <tr>
                                         <td><center><?php echo $row['idDepartamento']; ?></center></td>
@@ -160,7 +158,7 @@
                                                       }
                                                     ?>
                                                 </select><br>
-                                                <strong>Estado</strong><br>
+                                                <strong>Status</strong><br>
                                                 <select name="estado">
                                                 	<option value="s" <?php if($estado_depa=='s'){ echo 'selected'; } ?>>ACTIVO</option>
                                                     <option value="n" <?php if($estado_depa=='n'){ echo 'selected'; } ?>>NO ACTIVO</option>

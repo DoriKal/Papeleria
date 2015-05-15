@@ -73,7 +73,7 @@
                             <div class="span6">
                                 <strong>Nombre</strong><br>
                                 <input type="text" name="nombre" autocomplete="off" required value=""><br>
-                                <strong>Direccion</strong><br>
+                                <strong>Dirección</strong><br>
                                 <input type="text" name="dir" autocomplete="off" required value=""><br>
                                 <strong>Telefonos</strong><br>
                                 <input type="text" name="tel" autocomplete="off" required value=""><br>
@@ -81,7 +81,7 @@
                             <div class="span6">
                                 <strong>Encargado</strong><br>
                                 <input type="text" name="encargado" autocomplete="off" required value=""><br>
-                                <strong>Estado</strong><br>
+                                <strong>Status</strong><br>
                                 <select name="estado">
                                 	<option value="s">Activo</option>
                                     <option value="n">No Activo</option>
@@ -121,7 +121,7 @@
                     <td><strong>Direccion</strong></td>
                     <td><strong>Telefono</strong></td>
                     <td><strong>Encargado</strong></td>
-                    <td><center><strong>Estado</strong></center></td>
+                    <td><center><strong>Status</strong></center></td>
                     <td></td>
                   </tr>
 				  <?php 
@@ -167,7 +167,7 @@
                             <div class="span6">
                                 <strong>Encargado</strong><br>
                                 <input type="text" name="encargado" autocomplete="off" required value="<?php echo $row['encargado'] ?>"><br>
-                                <strong>Estado</strong><br>
+                                <strong>Status</strong><br>
                                 <select name="estado">
                                 	<option value="s" <?php if($row['estado']=='s'){ echo 'selected'; } ?>>Activo</option>
                                     <option value="n" <?php if($row['estado']=='n'){ echo 'selected'; } ?>>No Activo</option>
