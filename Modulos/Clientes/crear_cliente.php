@@ -170,7 +170,7 @@
                                     <input type="text" name="tel" autocomplete="off" value="<?php echo $tel; ?>" class="input-xlarge"><br>
                                     <strong>Celular</strong><br>
                                     <input type="text" name="cel" autocomplete="off" value="<?php echo $cel; ?>" class="input-xlarge"><br>
-                                    <strong>Direccion</strong><br>
+                                    <strong>Dirección</strong><br>
                                     <input type="text" name="dir" autocomplete="off" required value="<?php echo $dir; ?>" class="input-xlarge"><br>
                                     <strong>Observaciones</strong><br>
                                     <input type="text" name="nota" autocomplete="off" value="<?php echo $nota; ?>" class="input-xlarge"><br>
@@ -189,7 +189,7 @@
                                     }
                                     ?>
                                   </select><br>
-                                  <strong>Anticipo</strong><br>
+                                  <strong>Crédito Otorgado</strong><br>
                                   <div class="input-prepend input-append">
 									                   <span class="add-on"><strong><?php echo $s; ?></strong></span>
                                   	<input type="number" name="cupo" autocomplete="off" required value="<?php echo $cupo; ?>" class="input-large">

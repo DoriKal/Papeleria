@@ -96,7 +96,7 @@
                         </select><br>
                         <strong>Cantidad Actual</strong><br>
                       	<input type="number" name="cant" class="input-xlarge" value="1" min="1" autocomplete="off" required><br>
-                        <strong>Cantidad Minima</strong><br>
+                        <strong>Cantidad Mínima</strong><br>
                       	<input type="number" class="input-xlarge" name="minima" value="1" min="1" autocomplete="off" required><br>
                   </div>
                     <div class="modal-footer">

@@ -108,11 +108,11 @@
                           <tr>
                             <td>
                                 <h2 align="center">
-                                    <strong>Valor Recibido: </strong><br>
+                                    <strong>Efectivo: </strong><br>
                                     <pre style="font-size:24px">$ <?php echo formato($valor_recibido); ?></pre><br>
-                                    <strong>Total Factura: </strong><br>
+                                    <strong>Total: </strong><br>
                                     <pre style="font-size:24px">$ <?php echo formato($neto); ?></pre><br>
-                                    <strong>Vueltas: </strong><br>
+                                    <strong>Cambio: </strong><br>
                                     <pre style="font-size:24px">$ <?php echo formato($valor_recibido-$neto); ?></pre>
                                 </h2>                                 
                             </td>
@@ -137,7 +137,7 @@
                                                     </center>
                                                 </td>
                                                 <td><br>
-                                                    <strong>Factura: </strong><?php echo $factura; ?><br>
+                                                    <strong>Folio: </strong><?php echo $factura; ?><br>
                                                     <strong>Fecha: </strong><?php echo fecha($fecha); ?> | 
                                                     <strong>Hora: </strong><?php echo date('H:m:s'); ?><br>
                                                     <strong>Cajero/a: </strong><?php echo $cajero_nombre; ?>

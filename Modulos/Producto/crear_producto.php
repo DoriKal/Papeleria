@@ -108,7 +108,7 @@
 						if(empty($_GET['codigo'])){
 							$pa=mysql_query("SELECT * FROM articulo WHERE codigo='$codigo'");				
 							if($row=mysql_fetch_array($pa)){
-								echo mensajes('El Codigo "'.$codigo.'" Ya se Encuentra Registrado en la Base de Datos','rojo');
+								echo mensajes('El Código "'.$codigo.'" Ya se Encuentra Registrado en la Base de Datos','rojo');
 							}
 						}
 						
@@ -116,11 +116,11 @@
 						
 						if($existe==FALSE){
 							$oGuardar->crear();
-							echo mensajes('El Producto "'.$nombre.'" Identificado con el Codigo "'.$codigo.'" Ha sido Registrado con Exito<BR>
+							echo mensajes('El Producto "'.$nombre.'" Identificado con el Código "'.$codigo.'" Ha sido Registrado con Exito<BR>
 							<a href="crear_producto.php?codigo='.$url.'"><strong>Seguir Editando</strong></a>','verde');	
 						}else{
 							$oGuardar->actualizar();
-							echo mensajes('El Producto "'.$nombre.'" Identificado con el Codigo "'.$codigo.'" Ha sido Actualizado con Exito','verde');		
+							echo mensajes('El Producto "'.$nombre.'" Identificado con el Código "'.$codigo.'" Ha sido Actualizado con Exito','verde');		
 						}
 					}
 				?>
@@ -128,10 +128,10 @@
                   <tr>
                     <td>
                    	  <form name="form1" method="post" action="">
-                        <div align="center"><pre><strong>Informacion Basica</strong></pre></div>
+                        <div align="center"><pre><strong>Información Básica</strong></pre></div>
                         <div class="row-fluid">
                           <div class="span6" align="center">
-                          	<strong>Codigo de Registro</strong><br>
+                          	<strong>Código de Registro</strong><br>
                             <input type="text" name="codigo" <?php if($existe==TRUE){ echo 'readonly';}else{ echo 'required'; } ?>  class="input-xlarge" autocomplete="off" value="<?php echo $codigo; ?>"><br>
                           </div>
                           <div class="span6" align="center">

@@ -101,7 +101,7 @@ WHERE e.usu='$usu' and e.con ='$con'");
 				echo '<center><a href="index.php" class="btn"><strong>Intentar de Nuevo</strong></a></center>';
 			}
 		}else{
-			echo '	<input type="text" name="usu" class="input-block-level" placeholder="Documento" autocomplete="off" required>
+			echo '	<input type="text" name="usu" class="input-block-level" placeholder="Usuario" autocomplete="off" required>
 					<input type="password" name="con" class="input-block-level" placeholder="Password" autocomplete="off" required>
 					<div align="right"><button class="btn btn-large btn-primary" type="submit"><strong>Entrar</strong></button></div>';		
 		}

@@ -60,7 +60,8 @@
                   </tr>
                 </table>
                 <div align="right">
-                	<a class="btn" href="crear_producto.php" title="Ingresar Nuevo Producto"><i class="icon-plus"></i> <strong>Crear Producto</strong></a>
+                	<a class="btn" href="crear_producto.php" title="Ingresar Nuevo Producto"><i class="icon-plus"></i> 
+                  <strong>Crear Producto</strong></a>
                 </div>
                 <br>
                 <table class="table table-bordered">
@@ -71,6 +72,8 @@
                     <td><strong>Impuesto </strong></td>
                     <td><strong>Precio Compra</strong></td>
                     <td><strong>Precio Venta </strong></td>
+                    <td><strong>Existencia</strong></td>
+                    <td><strong>Stock mínimo</strong></td>
                     <td></td>
                   </tr>
                   <?php
@@ -78,7 +81,7 @@
 						          $buscar=limpiar($_POST['buscar']);
 						            $pame=mysql_query("SELECT * FROM articulo WHERE nombre LIKE '%$buscar%' or codigo='$buscar' ORDER BY nombre");	
 					          }else{
-						          $pame=mysql_query("SELECT * FROM articulo ORDER BY nombre");		
+						          $pame=mysql_query("SELECT * FROM articulo a LEFT JOIN pedido p ON a.codigo=p.articulo_codigo ORDER BY nombre");		
           					}		
           					while($row1=mysql_fetch_array($pame)){
           						$url=cadenas().encrypt($row1['codigo'],'URLCODIGO');
@@ -112,6 +115,8 @@
                     </td>
                     <td><center><?php echo "$ ".number_format($row1['a_costo'], 2, '.', ''); ?></center></td>
                     <td><center><?php echo "$ ".number_format($row1['a_venta'], 2, '.', ''); ?></center></td>
+                    <td><center><?php echo $row1['cant']; ?></center></td>
+                    <td><center><?php echo $row1['minima']; ?></center></td>
                     <td>
                     	<center>
                             <a class="btn btn-mini" href="crear_producto.php?codigo=<?php echo $url; ?>" title="Editar">

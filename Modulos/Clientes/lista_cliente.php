@@ -66,7 +66,7 @@
                   <tr class="well">
                     <td width="18%"><strong>Documento</strong></td>
                     <td width="62%"><strong>Nombre y Apellidos</strong></td>
-                    <td width="20%"><div align="right"><strong>Cupo Disponible</strong></div></td>
+                    <td width="20%"><div align="right"><strong>Crédito Disponible</strong></div></td>
                   </tr>
                   	<?php 
 				  		if(!empty($_POST['buscar'])){ 

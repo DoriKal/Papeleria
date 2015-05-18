@@ -92,7 +92,7 @@
                             <div class="span6">
                             	<strong>Nombre del Proveedor</strong><br>
                                 <input type="text" name="nombre" autocomplete="off" required><br>
-                                <strong>Direccion</strong><br>
+                                <strong>Dirección</strong><br>
                                 <input type="text" name="dir" autocomplete="off" required><br>
                                 <strong>Telefonos</strong><br>
                                 <input type="text" name="tel" autocomplete="off" required><br>

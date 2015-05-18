@@ -99,7 +99,7 @@ WHERE empleado.usu='$id_doc' and persona.doc='$id_doc'");
 							}else{
 								if($oConsultar->consultar('nom')==NULL){
 									$oAlumno->crear();
-									echo mensajes('El Usuario "'.$nom.' '.$ape.'" Ha sido Registrado/a con Exito<br>En el Aula "'.usuario($tipo).'"<br>
+									echo mensajes('El Usuario "'.$nom.' '.$ape.'" Ha sido Registrado/a con Exito<br>Con derechos de  "'.usuario($tipo).'"<br>
 									<a href="crear_usuario.php?doc='.$url.'"><strong>Seguir Editando</strong></a>','verde');
 									
 									//subir la imagen del articulo
@@ -119,7 +119,7 @@ WHERE empleado.usu='$id_doc' and persona.doc='$id_doc'");
 									}
 									
 								}else{
-									echo mensajes('El Usuario "'.$nom.' '.$ape.'" Ya se Encuentra Registrado con el Documento "'.$doc.'"','rojo');
+									echo mensajes('El Usuario "'.$nom.' '.$ape.'" Ya se Encuentra Registrado "'.$doc.'"','rojo');
 								}
 							}
 					}
@@ -170,7 +170,7 @@ WHERE empleado.usu='$id_doc' and persona.doc='$id_doc'");
                                     <input type="text" name="tel" autocomplete="off" value="<?php echo $tel; ?>" class="input-xlarge"><br>
                                     <strong>Celular</strong><br>
                                     <input type="text" name="cel" autocomplete="off" value="<?php echo $cel; ?>" class="input-xlarge"><br>
-                                    <strong>Direccion</strong><br>
+                                    <strong>Dirección</strong><br>
                                     <input type="text" name="dir" autocomplete="off" required value="<?php echo $dir; ?>" class="input-xlarge"><br>
                                     <strong>Observaciones</strong><br>
                                     <input type="text" name="nota" autocomplete="off" value="<?php echo $nota; ?>" class="input-xlarge"><br>

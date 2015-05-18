@@ -83,7 +83,7 @@
                             	<div class="row-fluid">
 			                        <div class="span6">
                                     	<strong>Cajero: </strong> <?php echo $cajero_nombre; ?><br>
-                                        <i class="icon-ok"></i> <strong>Deposito: </strong> <?php echo $nombre_deposito; ?><br>
+                                        <i class="icon-ok"></i> <strong>Sucursal: </strong> <?php echo $nombre_deposito; ?><br>
                                         <i class="icon-ok"></i> <strong>Fecha: </strong> <?php echo fecha(date('Y-m-d')); ?>
                                     </div>
                                     <div class="span6" align="right">
@@ -151,11 +151,11 @@ WHERE s.idDeposito=$id_bodega and (a.codigo='$buscar' or a.nombre='$buscar') GRO
                     	<div style="width:100%; height:300px; overflow: auto;">
                         <table class="table table-bordered">
                             <tr class="well">
-                            	<td><strong>Codigo</strong></td>
-                                <td><strong>Referencia</strong></td>
-                                <td><strong>Descripcion del Producto</strong></td>
+                            	<td><strong>Código</strong></td>
+                                <td><strong>R. Venta</strong></td>
+                                <td><strong>Descripción del Producto</strong></td>
                                 <td><strong><center>Cant.</center></strong></td>
-                                <td><strong><div align="right">Valor</div></strong></td>
+                                <td><strong><div align="right">Precio</div></strong></td>
                                 <td><strong><div align="right">Importe</div></strong></td>
                                 <td></td>
                             </tr>
@@ -251,9 +251,9 @@ WHERE s.idDeposito=$id_bodega and (a.codigo='$buscar' or a.nombre='$buscar') GRO
                     	<table class="table table-bordered">
                             <tr>
                                 <td>
-                                	<center><strong>Neto a Pagar</strong>
+                                	<center><strong>Total a Pagar</strong>
                                 	<pre><h2 class="text-success" align="center">$ <?php echo formato($neto); ?></h2></pre>
-                                    <strong>Numero de Items: <br><span class="badge badge-success"><?php echo $item; ?></span></strong></center>
+                                    <strong>Cantidad Productos: <br><span class="badge badge-success"><?php echo $item; ?></span></strong></center>
                                 </td>
                             </tr>
                     	</table>
@@ -263,7 +263,7 @@ WHERE s.idDeposito=$id_bodega and (a.codigo='$buscar' or a.nombre='$buscar') GRO
                                 <td>
                                 	<div align="center">
                                         <a href="#contado" role="button" class="btn" data-toggle="modal">
-                                            <i class="icon-shopping-cart"></i> <strong>Compra al Contado</strong>
+                                            <i class="icon-shopping-cart"></i> <strong>Cobrar</strong>
                                         </a>
                                 	</div>
                                 </td>
@@ -282,13 +282,13 @@ WHERE s.idDeposito=$id_bodega and (a.codigo='$buscar' or a.nombre='$buscar') GRO
     	<form name="contado" action="pro_contado.php" method="get">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h3 id="myModalLabel" align="center">Compra al Contado</h3>
+            <h3 id="myModalLabel" align="center">Cobrar</h3>
         </div>
         <div class="modal-body" align="center">
         	<strong>Hola! <?php echo $cajero_nombre; ?></strong><br>
-			<strong>Neto a Pagar</strong>
+			<strong>Total a Pagar</strong>
            	<pre><h2 class="text-success" align="center">$ <?php echo formato($neto); ?></h2></pre>
-            <strong>Dinero Recibido</strong><br>
+            <strong>Efectivo</strong><br>
             <div class="input-prepend input-append">
 				<span class="add-on"><strong><?php echo $s; ?></strong></span>
             	<input type="number" name="valor_recibido" min="<?php echo $neto; ?>" autocomplete="off" required>
