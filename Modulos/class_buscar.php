@@ -112,7 +112,7 @@ class Consultar_Producto{
 							INNER JOIN unidad u ON a.unidad_idUnidad=u.idUnidad) 
 							INNER JOIN departamento d ON a.departamento_idDepartamento=d.idDepartamento)
 							left JOIN pedido p ON p.articulo_codigo=a.codigo
-							WHERE codigo='$codigo' or nombre='$codigo' or a_costo='$codigo'");
+							WHERE codigo=$codigo or nombre='$codigo' or a_costo='$codigo'");
 		$this->fetch = mysql_fetch_array($this->consulta);
 	}
 	

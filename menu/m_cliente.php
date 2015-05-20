@@ -9,7 +9,7 @@
           <a class="brand" href="#" style="color:#FFF">Papelería e Impresiones Encanto</a>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li><a href="../../Principal.php" style="color:#FFF">Principal</a></li>
+              <li><a href="../../Principal.php" style="color:#FFF">Inicio</a></li>
               <li><a href="crear_cliente.php" style="color:#FFF">Crear Cliente</a></li>
               <li><a href="lista_cliente.php" style="color:#FFF">Listado de Clientes</a></li>
             </ul>

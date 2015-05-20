@@ -43,35 +43,40 @@
           <tr>
             <td>
             	<table class="table table-bordered">
-                  <tr class="well">
-                    <td>
-                    	<h1 align="center">Lista de Productos</h1>
-                        <center>
-                      	<form name="form3" method="post" action="" class="form-search">
-                        	<div class="input-prepend input-append">
-								<span class="add-on"><i class="icon-search"></i></span>
-                        		<input type="text" name="buscar" autocomplete="off" class="input-xxlarge search-query" 
-                                autofocus placeholder="Buscar Producto por Nombre">
-                            </div>
-                            <button type="submit" class="btn" name="buton"><strong>Buscar</strong></button>
-                    	</form>
-                        </center>
-                    </td>
-                  </tr>
-                </table>
+                <tr class="well">
+                  <td>
+                  	<h1 align="center">Lista de Productos</h1>
+                    <center>
+                    	<form name="form3" method="post" action="" class="form-search">
+                      	<div class="input-prepend input-append">
+							            <span class="add-on"><i class="icon-search"></i></span>
+                      		<input type="text" name="buscar" autocomplete="off" class="input-xxlarge search-query" 
+                              autofocus placeholder="Buscar Producto por Nombre">
+                        </div>
+                        <button type="submit" class="btn" name="buton"><strong>Buscar</strong></button>
+                  	  </form>
+                    </center>
+                  </td>
+                </tr>
+              </table>
                 <div align="right">
                 	<a class="btn" href="crear_producto.php" title="Ingresar Nuevo Producto"><i class="icon-plus"></i> 
                   <strong>Crear Producto</strong></a>
+                  <select class="btn" onchange="window.location=this.options[this.selectedIndex].value">
+                      <option value="">Reporte de </option>
+                      <option value="http://localhost/papeleria/Modulos/Producto/reporte_producto.php">Articulos</option>
+                      <option value="http://localhost/papeleria/Modulos/Producto/reporte_producto_stock.php">Stock Mínimo</option>
+                  </select>
                 </div>
                 <br>
                 <table class="table table-bordered">
                   <tr class="well">
                     <td><strong>Codigo</strong></td>
-                    <td><strong>Descripción</strong></td>
-                    <td><strong>Clasificación</strong></td>
+                    <td nowrap><strong>Descripción</strong></td>
+                    <td nowrap><strong>Clasificación</strong></td>
                     <td><strong>Impuesto </strong></td>
                     <td><strong>Precio Compra</strong></td>
-                    <td><strong>Precio Venta </strong></td>
+                    <td nowrap><strong>Precio Venta </strong></td>
                     <td><strong>Existencia</strong></td>
                     <td><strong>Stock mínimo</strong></td>
                     <td></td>
@@ -79,53 +84,95 @@
                   <?php
 				  	        if(!empty($_POST['buscar'])){
 						          $buscar=limpiar($_POST['buscar']);
-						            $pame=mysql_query("SELECT * FROM articulo WHERE nombre LIKE '%$buscar%' or codigo='$buscar' ORDER BY nombre");	
+						            $pame=mysql_query("SELECT * FROM articulo a LEFT JOIN pedido p ON a.codigo=p.articulo_codigo WHERE nombre LIKE '%$buscar%' or codigo='$buscar' ORDER BY codigo,nombre");	
 					          }else{
-						          $pame=mysql_query("SELECT * FROM articulo a LEFT JOIN pedido p ON a.codigo=p.articulo_codigo ORDER BY nombre");		
+						          $pame=mysql_query("SELECT * FROM articulo a LEFT JOIN pedido p ON a.codigo=p.articulo_codigo ORDER BY codigo,nombre");		
           					}		
           					while($row1=mysql_fetch_array($pame)){
           						$url=cadenas().encrypt($row1['codigo'],'URLCODIGO');
-          				  ?>
-                  <tr>
-                    <td><center><?php echo $row1['codigo']; ?></center></td>
-                    <td><?php echo strtoupper($row1['nombre']); ?></td>
-                    <td>
-                      <?php
-                      $idDepa = $row1['departamento_idDepartamento'];
-                        $pa=mysql_query("SELECT * FROM departamento WHERE estado='s' AND idDepartamento = $idDepa");       
-                          while($row=mysql_fetch_array($pa)){
-                          if($row['idDepartamento']==$row1['departamento_idDepartamento']){
-                            echo strtoupper($row['nombreDepartamento']); 
+          				?>
+                  <?php if ($row1['cant'] <= $row1['minima']) { ?>
+                    <tr bgcolor="#D59898">
+                      <td><center><?php echo $row1['codigo']; ?></center></td>
+                      <td nowrap><?php echo strtoupper($row1['nombre']); ?></td>
+                      <td nowrap>
+                        <?php
+                        $idDepa = $row1['departamento_idDepartamento'];
+                          $pa=mysql_query("SELECT * FROM departamento WHERE estado='s' AND idDepartamento = $idDepa");       
+                            while($row=mysql_fetch_array($pa)){
+                            if($row['idDepartamento']==$row1['departamento_idDepartamento']){
+                              echo strtoupper($row['nombreDepartamento']); 
+                            }
                           }
-                        }
-                      ?>
-                    </td>
-                    <td>
-                      <?php
-                        $idIva = $row1['iva_ivaventa'];
-                        $pa=mysql_query("SELECT * FROM iva WHERE estado='s' AND idIva=$idIva");        
-                                  while($row=mysql_fetch_array($pa)){
-                          if($row['idIva']==$idIva){
-                            echo strtoupper($row['nombreIva']); 
-                          }else{
-                            echo strtoupper($row['nombreIva']);  
+                        ?>
+                      </td>
+                      <td>
+                        <?php
+                          $idIva = $row1['iva_ivaventa'];
+                          $pa=mysql_query("SELECT * FROM iva WHERE estado='s' AND idIva=$idIva");        
+                                    while($row=mysql_fetch_array($pa)){
+                            if($row['idIva']==$idIva){
+                              echo strtoupper($row['nombreIva']); 
+                            }else{
+                              echo strtoupper($row['nombreIva']);  
+                            }
                           }
-                        }
-                      ?>
-                    </td>
-                    <td><center><?php echo "$ ".number_format($row1['a_costo'], 2, '.', ''); ?></center></td>
-                    <td><center><?php echo "$ ".number_format($row1['a_venta'], 2, '.', ''); ?></center></td>
-                    <td><center><?php echo $row1['cant']; ?></center></td>
-                    <td><center><?php echo $row1['minima']; ?></center></td>
-                    <td>
-                    	<center>
-                            <a class="btn btn-mini" href="crear_producto.php?codigo=<?php echo $url; ?>" title="Editar">
-                                <i class="icon-edit"></i>
-                            </a>
+                        ?>
+                      </td>
+                      <td><center><?php echo "$ ".number_format($row1['a_costo'], 2, '.', ''); ?></center></td>
+                      <td nowrap><center><?php echo "$ ".number_format($row1['a_venta'], 2, '.', ''); ?></center></td>
+                      <td><center><?php echo $row1['cant']; ?></center></td>
+                      <td><center><?php echo $row1['minima']; ?></center></td>
+                      <td>
+                        <center>
+                          <a class="btn btn-mini" href="crear_producto.php?codigo=<?php echo $url; ?>" title="Editar">
+                              <i class="icon-edit"></i>
+                          </a>
                         </center>
-                    </td>
-                  </tr>
+                      </td>
+                    </tr>
+                  <?php } else { ?>
+                    <tr bgcolor="#F2F2F2">
+                      <td><center><?php echo $row1['codigo']; ?></center></td>
+                      <td nowrap><?php echo strtoupper($row1['nombre']); ?></td>
+                      <td nowrap>
+                        <?php
+                        $idDepa = $row1['departamento_idDepartamento'];
+                          $pa=mysql_query("SELECT * FROM departamento WHERE estado='s' AND idDepartamento = $idDepa");       
+                            while($row=mysql_fetch_array($pa)){
+                            if($row['idDepartamento']==$row1['departamento_idDepartamento']){
+                              echo strtoupper($row['nombreDepartamento']); 
+                            }
+                          }
+                        ?>
+                      </td>
+                      <td>
+                        <?php
+                          $idIva = $row1['iva_ivaventa'];
+                          $pa=mysql_query("SELECT * FROM iva WHERE estado='s' AND idIva=$idIva");        
+                                    while($row=mysql_fetch_array($pa)){
+                            if($row['idIva']==$idIva){
+                              echo strtoupper($row['nombreIva']); 
+                            }else{
+                              echo strtoupper($row['nombreIva']);  
+                            }
+                          }
+                        ?>
+                      </td>
+                      <td><center><?php echo "$ ".number_format($row1['a_costo'], 2, '.', ''); ?></center></td>
+                      <td nowrap><center><?php echo "$ ".number_format($row1['a_venta'], 2, '.', ''); ?></center></td>
+                      <td><center><?php echo $row1['cant']; ?></center></td>
+                      <td><center><?php echo $row1['minima']; ?></center></td>
+                      <td>
+                        <center>
+                              <a class="btn btn-mini" href="crear_producto.php?codigo=<?php echo $url; ?>" title="Editar">
+                                  <i class="icon-edit"></i>
+                              </a>
+                          </center>
+                      </td>
+                    </tr>
                   <?php } ?>
+                <?php } ?>
                 </table>
             </td>
           </tr>

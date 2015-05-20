@@ -44,6 +44,27 @@
         padding-top: 60px;
         padding-bottom: 40px;
       }
+      table {
+        width:90%;
+        }
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 5px;
+            text-align: left;
+        }
+        table#t01 tr:nth-child(even) {
+            background-color: #eee;
+        }
+        table#t01 tr:nth-child(odd) {
+           background-color:#fff;
+        }
+        table#t01 th  {
+            background-color: black;
+            color: white;
+        }
     </style>
     <link href="../../css/bootstrap-responsive.css" rel="stylesheet">
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../../ico/apple-touch-icon-144-precomposed.png">
@@ -149,7 +170,7 @@ WHERE s.idDeposito=$id_bodega and (a.codigo='$buscar' or a.nombre='$buscar') GRO
                 <div class="row-fluid">
 	                <div class="span8">
                     	<div style="width:100%; height:300px; overflow: auto;">
-                        <table class="table table-bordered">
+                        <table id="t01" class="table table-bordered">
                             <tr class="well">
                             	<td><strong>Código</strong></td>
                                 <td><strong>R. Venta</strong></td>
@@ -270,6 +291,17 @@ WHERE s.idDeposito=$id_bodega and (a.codigo='$buscar' or a.nombre='$buscar') GRO
                             </tr>
                     	</table>
                         <?php } ?>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>
+                                    <div align="center">
+                                        <a href="venta_dia.php" role="button" class="btn">
+                                            <i class="icon-shopping-cart"></i> <strong>Corte Total</strong>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
                 
@@ -291,8 +323,8 @@ WHERE s.idDeposito=$id_bodega and (a.codigo='$buscar' or a.nombre='$buscar') GRO
             <strong>Efectivo</strong><br>
             <div class="input-prepend input-append">
 				<span class="add-on"><strong><?php echo $s; ?></strong></span>
-            	<input type="number" name="valor_recibido" min="<?php echo $neto; ?>" autocomplete="off" required>
-                <span class="add-on"><strong>.00</strong></span>
+            	<input type="number" name="valor_recibido" min="<?php echo $neto; ?>" step="0.01" autocomplete="off" required>
+                <span class="add-on"><strong></strong></span>
         	</div>
             <input type="hidden" value="<?php echo $neto; ?>" name="neto">
         </div>

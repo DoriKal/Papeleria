@@ -14,6 +14,16 @@
 	$d_venta=0;		$a_costo=0;		$b_costo=0;		$c_costo=0;
 	$codigo='';			$boton='Guardar Informacion';			$existe=FALSE;		$ivav=0;
 	$titulo='Crear Producto';
+
+  ######### SACAMOS EL VALOR MAXIMO DE LA FACTURA Y LE SUMAMOS UNO ##########
+    $pa=mysql_query("SELECT MAX(codigo)as maximo FROM articulo");       
+        if($row=mysql_fetch_array($pa)){
+      if($row['maximo']==NULL){
+        $articulo='1';
+      }else{
+        $articulo=$row['maximo']+1;
+      }
+    }
 	
 	if(!empty($_GET['codigo'])){
 		$id_codigo=limpiar($_GET['codigo']);
@@ -21,7 +31,7 @@
 		$id_codigo=decrypt($id_codigo,'URLCODIGO');
 		
 		
-		$pa=mysql_query("SELECT * FROM articulo WHERE codigo='$id_codigo'");				
+		$pa=mysql_query("SELECT * FROM articulo WHERE codigo=$id_codigo");				
 		if($row=mysql_fetch_array($pa)){
 			$existe=TRUE;
 			$oP=new Consultar_Producto($id_codigo);		$codigo=$id_codigo;
@@ -30,10 +40,10 @@
 			$defecto=$oP->consultar('defecto');			$ivacompra=$oP->consultar('idIva');
 			$ivaventa=$oP->consultar('idIva');		$costo_prov=$oP->consultar('costo_prov');
 			$ocosto_prov=$oP->consultar('ocosto_prov');	$a_venta=$oP->consultar('a_venta');
-			$b_venta=$oP->consultar('b_venta');			$c_venta=$oP->consultar('c_venta');
-			$d_venta=$oP->consultar('d_venta');			$a_costo=$oP->consultar('a_costo');
-			$b_costo=$oP->consultar('b_costo');			$c_costo=$oP->consultar('c_costo');
-			$d_costo=$oP->consultar('d_costo');			$titulo=$oP->consultar('nombre');		
+			$b_venta=$oP->consultar('b_venta');			/*$c_venta=$oP->consultar('c_venta');*/
+			/*$d_venta=$oP->consultar('d_venta');*/			$a_costo=$oP->consultar('a_costo');
+			$b_costo=$oP->consultar('b_costo');			/*$c_costo=$oP->consultar('c_costo');*/
+			/*$d_costo=$oP->consultar('d_costo');*/			$titulo=$oP->consultar('nombre');		
 			
 			$oIVA=new Consultar_IVA($ivaventa);	
 			$ivav=($oIVA->consultar('valor')/100)+1;
@@ -112,7 +122,7 @@
 							}
 						}
 						
-						$oGuardar=new Proceso_Producto($codigo, $nombre, $depart, $unidad, $defecto, $ivacompra, $ivaventa, $costo_prov, $ocosto_prov, $a_venta, $b_venta, $c_venta, $d_venta, $a_costo, $b_costo, $c_costo, $d_costo);
+						$oGuardar=new Proceso_Producto($codigo, $nombre, $depart, $unidad, $defecto, $ivacompra, $ivaventa, $costo_prov, $ocosto_prov, $a_venta, $b_venta, $a_costo, $b_costo);
 						
 						if($existe==FALSE){
 							$oGuardar->crear();
@@ -132,7 +142,11 @@
                         <div class="row-fluid">
                           <div class="span6" align="center">
                           	<strong>Código de Registro</strong><br>
-                            <input type="text" name="codigo" <?php if($existe==TRUE){ echo 'readonly';}else{ echo 'required'; } ?>  class="input-xlarge" autocomplete="off" value="<?php echo $codigo; ?>"><br>
+                            <?php if($existe==TRUE){  ?>
+                                <input readonly type="text" name="codigo" class="input-xlarge" autocomplete="off" value="<?php echo $codigo; ?>"><br>
+                              <?php }else{ ?>
+                                <input readonly type="text" name="codigo" class="input-xlarge" autocomplete="off" value="<?php echo $articulo; ?>"><br>
+                              <?php } ?> 
                           </div>
                           <div class="span6" align="center">
                           	<strong>Descripción Producto</strong><br>

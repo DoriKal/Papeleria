@@ -9,7 +9,7 @@
           <a class="brand" href="#" style="color:#FFF">Papelería e Impresiones Encanto</a>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li><a href="Principal.php" style="color:#FFF">Principal</a></li>
+              <li><a href="Principal.php" style="color:#FFF">Inicio</a></li>
                <?php if($_SESSION['tipo_user']=='a'){   ?>
               <li class="dropdown">
               	<a href="#" style="color:#FFF" class="dropdown-toggle" data-toggle="dropdown">Inventarios <b class="caret"></b></a>
@@ -23,7 +23,7 @@
              
               <li><a href="Modulos/Usuarios/" style="color:#FFF">Usuarios</a></li> 
               <li><a href="Modulos/Clientes/" style="color:#FFF">Clientes</a></li> 
-              <li><a href="Modulos/Datos/" style="color:#FFF">Administra Datos</a></li>
+              <li><a href="Modulos/Datos/" style="color:#FFF">Administración</a></li>
               <?php } ?>
               <li><a href="Modulos/Venta/" style="color:#FFF">Venta</a></li>
             </ul>

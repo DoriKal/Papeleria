@@ -37,11 +37,21 @@
 		$pa=mysql_query("SELECT MAX(factura)as maximo FROM factura");				
         if($row=mysql_fetch_array($pa)){
 			if($row['maximo']==NULL){
-				$factura='100000001';
+				$factura='100001';
 			}else{
 				$factura=$row['maximo']+1;
 			}
 		}
+
+        ######### SACAMOS EL VALOR MAXIMO DEL CORTE Y LE SUMAMOS UNO ##########
+        $pa=mysql_query("SELECT MAX(corte)as maximo FROM resumen");               
+        if($row=mysql_fetch_array($pa)){
+            if($row['maximo']==NULL){
+                $resumen='1001';
+            }else{
+                $resumen=$row['maximo']+1;
+            }
+        }
 		
 		######## NOS UBICAMOS EN QUE DEPOSITO O TIENDA SE HACE LA VENTA ##########
 		$pa=mysql_query("SELECT * FROM Cajero WHERE usuario_idUsuario3=$usu");				
@@ -57,7 +67,7 @@
 <html lang="es">
   <head>
     <meta charset="utf-8">
-    <title>Compras al Contado</title>
+    <title>Ventas al Contado</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -69,6 +79,27 @@
         padding-top: 60px;
         padding-bottom: 40px;
       }
+      table {
+        width:90%;
+        }
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 5px;
+            text-align: left;
+        }
+        table#t01 tr:nth-child(even) {
+            background-color: #eee;
+        }
+        table#t01 tr:nth-child(odd) {
+           background-color:#fff;
+        }
+        table#t01 th  {
+            background-color: black;
+            color: white;
+        }
     </style>
     <link href="../../css/bootstrap-responsive.css" rel="stylesheet">
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../../ico/apple-touch-icon-144-precomposed.png">
@@ -95,7 +126,6 @@
     	<table width="90%">
           <tr>
             <td>
-            	<strong><a href="index.php">Regresar</a></strong>
             	<table class="table table-bordered">
                   <tr class="well">
                     <td><h2 align="center">Compras al Contado</h2></td>
@@ -116,6 +146,11 @@
                                     <pre style="font-size:24px">$ <?php echo formato($valor_recibido-$neto); ?></pre>
                                 </h2>                                 
                             </td>
+                          </tr>
+                          <tr>
+                              <td>  
+                                  <strong><a style="font-size:24px; color:red;" class="btn" href="index.php">Regresar</a></strong>
+                              </td>
                           </tr>
                         </table>
                     </div>
@@ -145,7 +180,7 @@
                                             </tr>
                                         </table>
 										<br>
-                                        <table width="95%" rules="all" border="1">
+                                        <table id="t01" width="95%" rules="all" border="1">
                                         	<tr>
                                             	<td><strong>Cant</strong></td>
                                                 <td><strong>Cod. Articulo</strong></td>
@@ -156,7 +191,10 @@
                                             </tr>
                                             <?php 
 												$item=0;
-												$pa=mysql_query("SELECT * FROM (detalle d INNER JOIN articulo a ON d.articulo_codigo1=a.codigo) INNER JOIN iva i ON i.idIva=a.iva_ivaventa='$usu'");				
+												$pa=mysql_query("SELECT * FROM (detalle d 
+                                                    INNER JOIN articulo a ON d.articulo_codigo1=a.codigo) 
+                                                    INNER JOIN iva i ON i.idIva=a.iva_ivaventa 
+                                                    -- WHERE d.usuario_idUsuario1 = $usu");				
 										        while($row=mysql_fetch_array($pa)){												
 													$item=$item+$row['cant'];	$cantidad=$row['cant'];
 													$codigo=$row['codigo'];
@@ -172,19 +210,33 @@
 													$neto=$neto+$importe;
 													########################################
 													if($row['ref']==NULL){
-														$referencia='Sin Referencia';
+														$referencia='S/R';
 													}else{
 														$referencia=$row['ref'];
 													}
 													
 													#########DESCONTAR INVENTARIO################################################################
-													$pwa=mysql_query("SELECT cant FROM pedido p INNER JOIN sucursal s ON s.idDeposito=p.deposito_idDeposito WHERE p.articulo_codigo=$codigo and p.deposito_idDeposito=$id_bodega");				
-										       		if($roww=mysql_fetch_array($pwa)){	
-														$new_cant=$roww['cant']-$cantidad;
-														mysql_query("UPDATE pedido SET cant='$new_cant' 
-                                                        WHERE pedido.articulo_codigo='$codigo' and pedido.deposito_idDeposito='$id_bodega'");
+													$pwa=mysql_query("SELECT cant FROM pedido WHERE articulo_codigo = $codigo");				
+										       		if($roww=mysql_fetch_array($pwa)){
+                                                        $existencia = $roww['cant'];	
+														$new_cant=$existencia-$cantidad;
+
+														mysql_query("UPDATE pedido SET cant=$new_cant 
+                                                        WHERE articulo_codigo=$codigo");
 													}
 													#############################################################################################
+
+                                                    #########DETALLE DE LA VENTA################################################################
+                                                    $query=mysql_query("SELECT * FROM detalle d WHERE d.articulo_codigo1 = $codigo");             
+                                                    if($rowDetalle=mysql_fetch_array($query)){  
+                                                        $articuloD=$rowDetalle['articulo_codigo1'];
+                                                        $facturaD=$factura;
+                                                        $cantd=$rowDetalle['cant'];
+                                                        $fechaD=$fecha;
+                                                        $userD=$rowDetalle['usuario_idUsuario1'];
+                                                        mysql_query("INSERT INTO detalleventa(factura,articulo_codigo2,cant,fecha,usuario_idUsuario2) VALUES ('$facturaD',$articuloD,$cantd,'$fecha',$usu)");
+                                                    }
+                                                    #############################################################################################
 											?>
                                             <tr>
                                             	<td>x<?php echo $cantidad; ?></td>
@@ -224,7 +276,7 @@
 		mysql_query("INSERT INTO factura (factura,valor,fecha,estado,idUsuario) VALUE ('$factura','$netoO','$fecha','s',$usu)");
 		
 		$mensaje='Venta al Contado Factura: '.$factura.' por Valor de $ '.formato($netoO);
-		mysql_query("INSERT INTO resumen (concepto,clase,valor,tipo,fecha,idUsuario,estado) VALUE ('$mensaje','VENTA','$netoO','ENTRADA','$fecha','$usu','s')");
+		mysql_query("INSERT INTO resumen (corte,concepto,valor,tipo,fecha,user_idUsuario,estado) VALUE ('$factura','$mensaje','$netoO','Entrada','$fecha',$usu,'s')");
 		
 		mysql_query("DELETE FROM detalle WHERE usuario_idUsuario1=$usu");
 	?>

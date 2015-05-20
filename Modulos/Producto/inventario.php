@@ -106,7 +106,7 @@
                     </form>
                 </div>
                 <br>
-                <table class="table table-bordered">
+                <table id="t01" class="table table-bordered">
                   <tr>
                     <td>
                     	<center><pre><strong>Listado de Existencia por Almacen</strong></pre></center>
@@ -136,7 +136,7 @@
 								
 							}
 						?>
-                        <table class="table table-bordered table table-hover">
+                        <table id="t01" class="table table-bordered table table-hover">
                           <tr class="well">
                             <td><center><strong>ID</strong></center></td>
                             <td><strong>Deposito</strong></td>

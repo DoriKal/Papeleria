@@ -9,7 +9,7 @@
           <a class="brand" href="#" style="color:#FFF">Configuración</a>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li><a href="../../Principal.php" style="color:#FFF">Principal</a></li>
+              <li><a href="../../Principal.php" style="color:#FFF">Inicio</a></li>
               <li><a href="iva.php" style="color:#FFF">IVA</a></li>
               <li><a href="Deposito.php" style="color:#FFF">Sucursales</a></li>
               <li><a href="departamento.php" style="color:#FFF">Departamentos</a></li>

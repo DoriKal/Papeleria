@@ -9,7 +9,7 @@
           <a class="brand" href="#" style="color:#FFF">Papelería e Impresiones Encanto</a>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li><a href="../../Principal.php" style="color:#FFF">Principal</a></li>
+              <li><a href="../../Principal.php" style="color:#FFF">Inicio</a></li>
               <li class="dropdown">
               	<a href="#" id="drop2" style="color:#FFF" role="button" class="dropdown-toggle" data-toggle="dropdown">
                 	Producto <b class="caret"></b>
