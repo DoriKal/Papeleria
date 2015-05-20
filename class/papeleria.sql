@@ -3,11 +3,13 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-05-2015 a las 03:47:31
+-- Tiempo de generación: 20-05-2015 a las 16:42:57
 -- Versión del servidor: 5.6.21-log
 -- Versión de PHP: 5.6.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -27,8 +29,9 @@ USE `papeleria`;
 --
 -- Estructura de tabla para la tabla `articulo`
 --
+-- Creación: 15-05-2015 a las 01:37:47
+--
 
-DROP TABLE IF EXISTS `articulo`;
 CREATE TABLE IF NOT EXISTS `articulo` (
 `codigo` int(11) NOT NULL,
   `nombre` varchar(20) NOT NULL,
@@ -47,17 +50,29 @@ CREATE TABLE IF NOT EXISTS `articulo` (
   `b_costo` varchar(20) NOT NULL,
   `c_costo` varchar(20) NOT NULL,
   `d_costo` varchar(20) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=244 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=123214136 DEFAULT CHARSET=latin1;
+
+--
+-- RELACIONES PARA LA TABLA `articulo`:
+--   `departamento_idDepartamento`
+--       `departamento` -> `idDepartamento`
+--   `iva_ivaventa`
+--       `iva` -> `idIva`
+--   `iva_ivacompra`
+--       `iva` -> `idIva`
+--   `unidad_idUnidad`
+--       `unidad` -> `idUnidad`
+--
 
 --
 -- Volcado de datos para la tabla `articulo`
 --
 
 INSERT INTO `articulo` (`codigo`, `nombre`, `departamento_idDepartamento`, `unidad_idUnidad`, `defecto`, `iva_ivacompra`, `iva_ivaventa`, `costo_prov`, `ocosto_prov`, `a_venta`, `b_venta`, `c_venta`, `d_venta`, `a_costo`, `b_costo`, `c_costo`, `d_costo`) VALUES
-(1, 'Impresion a color ', 1, 1, 'A', 3, 3, '0', '0', '1', '0', '0', '0', '0.7', '0', '0', '0'),
+(1, 'Impresion a color ', 1, 1, 'A', 3, 3, '0', '0', '1', '0.8', '0', '0', '0.7', '0.5', '0', '0'),
 (2, 'abacos infantil infa', 2, 1, 'A', 3, 3, '0', '0', '15', '0', '0', '0', '0', '0', '0', '0'),
-(3, 'acuarelas pelikan ju', 3, 1, 'A', 3, 3, '0', '0', '52', '0', '0', '0', '44.8275862068966', '0', '0', '0'),
-(4, 'acuarelas pelikan in', 3, 1, 'A', 3, 3, '0', '0', '15', '0', '0', '0', '12.9310344827586', '0', '0', '0'),
+(3, 'acuarelas pelikan ju', 3, 1, 'A', 3, 3, '40', '4.4', '52', '0', '0', '0', '0', '0', '0', '0'),
+(4, 'acuarelas pelikan in', 3, 1, 'A', 3, 3, '0', '0', '15', '14', '0', '0', '0', '0', '0', '0'),
 (5, 'acuarelas vina vina', 3, 1, 'A', 3, 3, '0', '0', '10', '0', '0', '0', '8.62068965517241', '0', '0', '0'),
 (6, 'goma migajon factis', 4, 1, 'A', 3, 3, '0', '0', '8', '0', '0', '0', '6.89655172413793', '0', '0', '0'),
 (7, 'goma migajon pelican', 4, 1, 'A', 3, 3, '0', '0', '6', '0', '0', '0', '5.17241379310345', '0', '0', '0'),
@@ -296,19 +311,31 @@ INSERT INTO `articulo` (`codigo`, `nombre`, `departamento_idDepartamento`, `unid
 (240, 'Rihan punta roma eco', 38, 1, 'A', 3, 3, '0', '0', '10', '0', '0', '0', '8.62068965517241', '0', '0', '0'),
 (241, 'tinta azor rolaplica', 39, 1, 'A', 3, 3, '0', '0', '30', '0', '0', '0', '25.8620689655172', '0', '0', '0'),
 (242, 'uhu 8ml uhu', 40, 1, 'A', 3, 3, '0', '0', '18', '0', '0', '0', '15.5172413793103', '0', '0', '0'),
-(243, 'uhu 20ml uhu', 40, 1, 'A', 3, 3, '0', '0', '34', '0', '0', '0', '29.3103448275862', '0', '0', '0');
+(243, 'uhu 20ml uhu', 40, 1, 'A', 3, 3, '0', '0', '34', '0', '0', '0', '29.3103448275862', '0', '0', '0'),
+(244, 'Producto de testst', 1, 1, 'A', 3, 3, '15', '3', '25', '23', '', '', '18', '17', '', ''),
+(245, 'Producto test final', 1, 1, 'A', 2, 2, '10', '2', '16', '14', '', '', '12', '12', '', ''),
+(246, 'Producto Final', 1, 1, 'A', 2, 2, '20', '5', '30', '28', '', '', '25', '25', '', '');
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `cajero`
 --
+-- Creación: 15-05-2015 a las 01:35:05
+--
 
-DROP TABLE IF EXISTS `cajero`;
 CREATE TABLE IF NOT EXISTS `cajero` (
   `usuario_idUsuario3` int(11) NOT NULL,
   `deposito_idDeposito3` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- RELACIONES PARA LA TABLA `cajero`:
+--   `deposito_idDeposito3`
+--       `sucursal` -> `idDeposito`
+--   `usuario_idUsuario3`
+--       `empleado` -> `idUsuario`
+--
 
 --
 -- Volcado de datos para la tabla `cajero`
@@ -322,8 +349,9 @@ INSERT INTO `cajero` (`usuario_idUsuario3`, `deposito_idDeposito3`) VALUES
 --
 -- Estructura de tabla para la tabla `cliente`
 --
+-- Creación: 15-05-2015 a las 01:35:05
+--
 
-DROP TABLE IF EXISTS `cliente`;
 CREATE TABLE IF NOT EXISTS `cliente` (
   `idCliente` int(11) NOT NULL,
   `doc` varchar(20) NOT NULL,
@@ -331,6 +359,12 @@ CREATE TABLE IF NOT EXISTS `cliente` (
   `puntos` varchar(20) NOT NULL,
   `persona_idPersona2` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- RELACIONES PARA LA TABLA `cliente`:
+--   `persona_idPersona2`
+--       `persona` -> `idPersona`
+--
 
 --
 -- Volcado de datos para la tabla `cliente`
@@ -344,8 +378,9 @@ INSERT INTO `cliente` (`idCliente`, `doc`, `cupo`, `puntos`, `persona_idPersona2
 --
 -- Estructura de tabla para la tabla `departamento`
 --
+-- Creación: 15-05-2015 a las 01:35:05
+--
 
-DROP TABLE IF EXISTS `departamento`;
 CREATE TABLE IF NOT EXISTS `departamento` (
 `idDepartamento` int(11) NOT NULL,
   `nombreDepartamento` varchar(30) NOT NULL,
@@ -354,12 +389,18 @@ CREATE TABLE IF NOT EXISTS `departamento` (
 ) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=latin1;
 
 --
+-- RELACIONES PARA LA TABLA `departamento`:
+--   `empresa_idEmpresa1`
+--       `empresa` -> `idEmpresa`
+--
+
+--
 -- Volcado de datos para la tabla `departamento`
 --
 
 INSERT INTO `departamento` (`idDepartamento`, `nombreDepartamento`, `estado`, `empresa_idEmpresa1`) VALUES
 (1, 'Impresiones', 's', 1),
-(2, 'abacos', 's', 1),
+(2, 'Abacos', 's', 1),
 (3, 'acuarelas', 's', 1),
 (4, 'borradores', 's', 1),
 (5, 'brillantina', 's', 1),
@@ -404,36 +445,94 @@ INSERT INTO `departamento` (`idDepartamento`, `nombreDepartamento`, `estado`, `e
 --
 -- Estructura de tabla para la tabla `detalle`
 --
+-- Creación: 20-05-2015 a las 07:53:33
+--
 
-DROP TABLE IF EXISTS `detalle`;
 CREATE TABLE IF NOT EXISTS `detalle` (
 `id` int(11) NOT NULL,
   `articulo_codigo1` int(11) NOT NULL,
   `ref` varchar(45) NOT NULL,
   `cant` int(11) NOT NULL,
   `usuario_idUsuario1` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- RELACIONES PARA LA TABLA `detalle`:
+--   `articulo_codigo1`
+--       `articulo` -> `codigo`
+--   `usuario_idUsuario1`
+--       `empleado` -> `idUsuario`
+--
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `detalleprov`
 --
+-- Creación: 15-05-2015 a las 01:35:05
+--
 
-DROP TABLE IF EXISTS `detalleprov`;
 CREATE TABLE IF NOT EXISTS `detalleprov` (
 `idDetalleProveedor` int(11) NOT NULL,
   `producto_codigo` int(11) NOT NULL,
   `proveedor_id` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=243 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+
+--
+-- RELACIONES PARA LA TABLA `detalleprov`:
+--   `producto_codigo`
+--       `articulo` -> `codigo`
+--   `proveedor_id`
+--       `proveedor` -> `id`
+--
+
+--
+-- Volcado de datos para la tabla `detalleprov`
+--
+
+INSERT INTO `detalleprov` (`idDetalleProveedor`, `producto_codigo`, `proveedor_id`) VALUES
+(1, 2, 1),
+(2, 244, 1),
+(3, 4, 1),
+(4, 3, 1),
+(5, 186, 1),
+(6, 168, 1),
+(7, 245, 1),
+(8, 1, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `detalleventa`
+--
+-- Creación: 20-05-2015 a las 01:25:54
+--
+
+CREATE TABLE IF NOT EXISTS `detalleventa` (
+`id` int(11) NOT NULL,
+  `factura` varchar(45) NOT NULL,
+  `articulo_codigo2` int(11) NOT NULL,
+  `cant` int(11) NOT NULL,
+  `fecha` date DEFAULT NULL,
+  `usuario_idUsuario2` int(11) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
+
+--
+-- RELACIONES PARA LA TABLA `detalleventa`:
+--   `articulo_codigo2`
+--       `articulo` -> `codigo`
+--   `usuario_idUsuario2`
+--       `empleado` -> `idUsuario`
+--
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `empleado`
 --
+-- Creación: 15-05-2015 a las 01:35:05
+--
 
-DROP TABLE IF EXISTS `empleado`;
 CREATE TABLE IF NOT EXISTS `empleado` (
 `idUsuario` int(11) NOT NULL,
   `usu` varchar(20) COLLATE utf8_swedish_ci NOT NULL,
@@ -443,6 +542,12 @@ CREATE TABLE IF NOT EXISTS `empleado` (
   `tipo` enum('c','a') COLLATE utf8_swedish_ci NOT NULL,
   `persona_idPersona` int(11) DEFAULT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+--
+-- RELACIONES PARA LA TABLA `empleado`:
+--   `persona_idPersona`
+--       `persona` -> `idPersona`
+--
 
 --
 -- Volcado de datos para la tabla `empleado`
@@ -457,8 +562,9 @@ INSERT INTO `empleado` (`idUsuario`, `usu`, `con`, `correo`, `fecha`, `tipo`, `p
 --
 -- Estructura de tabla para la tabla `empresa`
 --
+-- Creación: 15-05-2015 a las 01:35:05
+--
 
-DROP TABLE IF EXISTS `empresa`;
 CREATE TABLE IF NOT EXISTS `empresa` (
 `idEmpresa` int(11) NOT NULL,
   `empresa` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
@@ -487,8 +593,9 @@ INSERT INTO `empresa` (`idEmpresa`, `empresa`, `nit`, `direccion`, `pais`, `ciud
 --
 -- Estructura de tabla para la tabla `factura`
 --
+-- Creación: 20-05-2015 a las 07:54:20
+--
 
-DROP TABLE IF EXISTS `factura`;
 CREATE TABLE IF NOT EXISTS `factura` (
 `id` int(11) NOT NULL,
   `factura` varchar(255) NOT NULL,
@@ -496,23 +603,22 @@ CREATE TABLE IF NOT EXISTS `factura` (
   `fecha` date NOT NULL,
   `estado` varchar(255) NOT NULL,
   `idUsuario` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `factura`
+-- RELACIONES PARA LA TABLA `factura`:
+--   `idUsuario`
+--       `empleado` -> `idUsuario`
 --
-
-INSERT INTO `factura` (`id`, `factura`, `valor`, `fecha`, `estado`, `idUsuario`) VALUES
-(1, '100000001', '15', '2015-05-13', 's', 1),
-(2, '100000002', '16', '2015-05-14', 's', 1);
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `iva`
 --
+-- Creación: 15-05-2015 a las 01:35:05
+--
 
-DROP TABLE IF EXISTS `iva`;
 CREATE TABLE IF NOT EXISTS `iva` (
 `idIva` int(11) NOT NULL,
   `nombreIva` varchar(255) NOT NULL,
@@ -534,23 +640,48 @@ INSERT INTO `iva` (`idIva`, `nombreIva`, `valor`, `estado`) VALUES
 --
 -- Estructura de tabla para la tabla `pedido`
 --
+-- Creación: 15-05-2015 a las 01:35:05
+--
 
-DROP TABLE IF EXISTS `pedido`;
 CREATE TABLE IF NOT EXISTS `pedido` (
 `id` int(11) NOT NULL,
   `deposito_idDeposito` int(11) NOT NULL,
   `articulo_codigo` int(11) NOT NULL,
   `cant` varchar(255) NOT NULL,
   `minima` varchar(255) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=244 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+
+--
+-- RELACIONES PARA LA TABLA `pedido`:
+--   `articulo_codigo`
+--       `articulo` -> `codigo`
+--   `deposito_idDeposito`
+--       `sucursal` -> `idDeposito`
+--
+
+--
+-- Volcado de datos para la tabla `pedido`
+--
+
+INSERT INTO `pedido` (`id`, `deposito_idDeposito`, `articulo_codigo`, `cant`, `minima`) VALUES
+(1, 1, 2, '2', '5'),
+(2, 1, 244, '0', '5'),
+(3, 1, 4, '1', '5'),
+(4, 1, 3, '5', '5'),
+(5, 1, 5, '19', '5'),
+(6, 1, 186, '30', '5'),
+(7, 1, 168, '30', '5'),
+(8, 1, 245, '37', '5'),
+(9, 1, 1, '50', '5');
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `persona`
 --
+-- Creación: 15-05-2015 a las 01:35:05
+--
 
-DROP TABLE IF EXISTS `persona`;
 CREATE TABLE IF NOT EXISTS `persona` (
 `idPersona` int(11) NOT NULL,
   `doc` varchar(30) COLLATE utf8_swedish_ci NOT NULL,
@@ -568,6 +699,12 @@ CREATE TABLE IF NOT EXISTS `persona` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
 
 --
+-- RELACIONES PARA LA TABLA `persona`:
+--   `empresa_idEmpresa`
+--       `empresa` -> `idEmpresa`
+--
+
+--
 -- Volcado de datos para la tabla `persona`
 --
 
@@ -580,8 +717,9 @@ INSERT INTO `persona` (`idPersona`, `doc`, `nom`, `ape`, `fecha`, `tel`, `cel`, 
 --
 -- Estructura de tabla para la tabla `proveedor`
 --
+-- Creación: 15-05-2015 a las 01:35:05
+--
 
-DROP TABLE IF EXISTS `proveedor`;
 CREATE TABLE IF NOT EXISTS `proveedor` (
 `id` int(11) NOT NULL,
   `nombre` varchar(255) NOT NULL,
@@ -603,10 +741,36 @@ INSERT INTO `proveedor` (`id`, `nombre`, `dir`, `tel`, `fax`, `nota`, `contacto`
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `sucursal`
+-- Estructura de tabla para la tabla `resumen`
+--
+-- Creación: 20-05-2015 a las 07:55:08
 --
 
-DROP TABLE IF EXISTS `sucursal`;
+CREATE TABLE IF NOT EXISTS `resumen` (
+`idResumen` int(11) NOT NULL,
+  `corte` varchar(10) DEFAULT NULL,
+  `concepto` varchar(150) DEFAULT NULL,
+  `valor` varchar(15) DEFAULT NULL,
+  `tipo` enum('Pendiente','Salida','Entrada') DEFAULT NULL,
+  `fecha` date DEFAULT NULL,
+  `user_idUsuario` int(11) DEFAULT NULL,
+  `estado` char(4) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- RELACIONES PARA LA TABLA `resumen`:
+--   `user_idUsuario`
+--       `empleado` -> `idUsuario`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `sucursal`
+--
+-- Creación: 15-05-2015 a las 01:35:05
+--
+
 CREATE TABLE IF NOT EXISTS `sucursal` (
 `idDeposito` int(11) NOT NULL,
   `nombre` varchar(255) NOT NULL,
@@ -628,20 +792,22 @@ INSERT INTO `sucursal` (`idDeposito`, `nombre`, `dir`, `tel`, `encargado`, `esta
 --
 -- Estructura de tabla para la tabla `unidad`
 --
+-- Creación: 15-05-2015 a las 01:35:05
+--
 
-DROP TABLE IF EXISTS `unidad`;
 CREATE TABLE IF NOT EXISTS `unidad` (
 `idUnidad` int(11) NOT NULL,
   `nombreUnidad` varchar(255) NOT NULL,
   `estado` varchar(255) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `unidad`
 --
 
 INSERT INTO `unidad` (`idUnidad`, `nombreUnidad`, `estado`) VALUES
-(1, 'Pieza', 's');
+(1, 'Pieza', 's'),
+(2, 'N/A', 's');
 
 --
 -- Índices para tablas volcadas
@@ -682,6 +848,12 @@ ALTER TABLE `detalle`
 --
 ALTER TABLE `detalleprov`
  ADD PRIMARY KEY (`idDetalleProveedor`), ADD KEY `proveedor_id` (`proveedor_id`), ADD KEY `producto_codigo_idx` (`producto_codigo`);
+
+--
+-- Indices de la tabla `detalleventa`
+--
+ALTER TABLE `detalleventa`
+ ADD PRIMARY KEY (`id`), ADD KEY `articulo_codigo_idx` (`articulo_codigo2`), ADD KEY `usuario_idUsuario_idx` (`usuario_idUsuario2`);
 
 --
 -- Indices de la tabla `empleado`
@@ -726,6 +898,12 @@ ALTER TABLE `proveedor`
  ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `resumen`
+--
+ALTER TABLE `resumen`
+ ADD PRIMARY KEY (`idResumen`), ADD KEY `user_idUsuario` (`user_idUsuario`);
+
+--
 -- Indices de la tabla `sucursal`
 --
 ALTER TABLE `sucursal`
@@ -745,7 +923,7 @@ ALTER TABLE `unidad`
 -- AUTO_INCREMENT de la tabla `articulo`
 --
 ALTER TABLE `articulo`
-MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=244;
+MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=123214136;
 --
 -- AUTO_INCREMENT de la tabla `departamento`
 --
@@ -755,12 +933,17 @@ MODIFY `idDepartamento` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=41;
 -- AUTO_INCREMENT de la tabla `detalle`
 --
 ALTER TABLE `detalle`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `detalleprov`
 --
 ALTER TABLE `detalleprov`
-MODIFY `idDetalleProveedor` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=243;
+MODIFY `idDetalleProveedor` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+--
+-- AUTO_INCREMENT de la tabla `detalleventa`
+--
+ALTER TABLE `detalleventa`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=26;
 --
 -- AUTO_INCREMENT de la tabla `empleado`
 --
@@ -775,7 +958,7 @@ MODIFY `idEmpresa` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 -- AUTO_INCREMENT de la tabla `factura`
 --
 ALTER TABLE `factura`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `iva`
 --
@@ -785,7 +968,7 @@ MODIFY `idIva` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 -- AUTO_INCREMENT de la tabla `pedido`
 --
 ALTER TABLE `pedido`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=244;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT de la tabla `persona`
 --
@@ -797,6 +980,11 @@ MODIFY `idPersona` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 ALTER TABLE `proveedor`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
+-- AUTO_INCREMENT de la tabla `resumen`
+--
+ALTER TABLE `resumen`
+MODIFY `idResumen` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT de la tabla `sucursal`
 --
 ALTER TABLE `sucursal`
@@ -805,7 +993,7 @@ MODIFY `idDeposito` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 -- AUTO_INCREMENT de la tabla `unidad`
 --
 ALTER TABLE `unidad`
-MODIFY `idUnidad` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+MODIFY `idUnidad` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- Restricciones para tablas volcadas
 --
@@ -853,6 +1041,13 @@ ADD CONSTRAINT `producto_codigo` FOREIGN KEY (`producto_codigo`) REFERENCES `art
 ADD CONSTRAINT `proveedor_id` FOREIGN KEY (`proveedor_id`) REFERENCES `proveedor` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Filtros para la tabla `detalleventa`
+--
+ALTER TABLE `detalleventa`
+ADD CONSTRAINT `articulo_codigo2` FOREIGN KEY (`articulo_codigo2`) REFERENCES `articulo` (`codigo`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `usuario_idUsuario2` FOREIGN KEY (`usuario_idUsuario2`) REFERENCES `empleado` (`idUsuario`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Filtros para la tabla `empleado`
 --
 ALTER TABLE `empleado`
@@ -876,6 +1071,13 @@ ADD CONSTRAINT `deposito_idDeposito` FOREIGN KEY (`deposito_idDeposito`) REFEREN
 --
 ALTER TABLE `persona`
 ADD CONSTRAINT `empresa_idEmpresa` FOREIGN KEY (`empresa_idEmpresa`) REFERENCES `empresa` (`idEmpresa`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `resumen`
+--
+ALTER TABLE `resumen`
+ADD CONSTRAINT `user_idUsuario` FOREIGN KEY (`user_idUsuario`) REFERENCES `empleado` (`idUsuario`) ON DELETE CASCADE ON UPDATE CASCADE;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
