@@ -53,7 +53,7 @@
                         	<div class="input-prepend input-append">
 								<span class="add-on"><i class="icon-search"></i></span>
                         		<input type="text" name="buscar" autocomplete="off" class="input-xxlarge search-query" 
-                                autofocus placeholder="Buscar Alumnos por Documento o Nombres">
+                                autofocus placeholder="Buscar Cliente por nombre">
                             </div>
                             <button type="submit" class="btn" name="buton"><strong>Buscar</strong></button>
                     	</form>
@@ -64,30 +64,30 @@
                 
             	<table class="table table-bordered">
                   <tr class="well">
-                    <td width="18%"><strong>Documento</strong></td>
-                    <td width="62%"><strong>Nombre y Apellidos</strong></td>
+                    <td width="18%"><strong>Código</strong></td>
+                    <td width="62%"><strong>Nombre</strong></td>
                     <td width="20%"><div align="right"><strong>Crédito Disponible</strong></div></td>
                   </tr>
                   	<?php 
-				  		if(!empty($_POST['buscar'])){ 
-							$buscar=limpiar($_POST['buscar']);
-							$pa=mysql_query("SELECT * FROM (cliente c INNER JOIN persona p ON c.doc=p.doc) INNER JOIN empleado e ON p.idPersona=e.persona_idPersona
-WHERE e.tipo='c' and (p.doc='$buscar' or p.nom LIKE '%$buscar%' or p.ape LIKE '%$buscar%')");				
-							while($row=mysql_fetch_array($pa)){
-								$url=cadenas().encrypt($row['doc'],'URLCODIGO');
-					?>
-                   <tr>
+        				  		if(!empty($_POST['buscar'])){ 
+        							       $buscar=limpiar($_POST['buscar']);
+        							       $pa=mysql_query("SELECT * FROM (cliente c INNER JOIN persona p ON c.doc=p.doc) 
+WHERE p.doc ='$buscar' OR p.nom LIKE '%$buscar%' OR p.ape LIKE '%$buscar%'");				
+        							while($row=mysql_fetch_array($pa)){
+        								    $url=cadenas().encrypt($row['doc'],'URLCODIGO');
+					          ?>
+                  <tr>
                     <td><?php echo $row['doc']; ?></td>
                     <td>
-                    	<a href="crear_cliente.php?doc=<?php echo $url; ?>" title="Editar Cliente">
-							<?php echo $row['nom'].' '.$row['ape']; ?>
+                    	<a href="crear_cliente.php?idDoc=<?php echo $url; ?>" title="Editar Cliente">
+							         <?php echo $row['nom'].' '.$row['ape']; ?>
                         </a>
                     </td>
                     <td>
                     	<div align="right"> $ <?php echo formato($row['cupo']); ?></div>
                     </td>
                   </tr>
-                  <?php }} ?>
+                  <?php } } ?>
                 </table>
                 
             </td>

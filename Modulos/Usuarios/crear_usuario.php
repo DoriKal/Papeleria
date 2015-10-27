@@ -18,7 +18,7 @@
 		$id_doc=decrypt($id_doc,'URLCODIGO');
 		$pa=mysql_query("SELECT * FROM 
 (persona INNER JOIN empleado ON persona.idPersona=empleado.persona_idPersona) 
-INNER JOIN cajero ON empleado.idUsuario=cajero.usuario_idUsuario3
+LEFT JOIN cajero ON empleado.idUsuario=cajero.usuario_idUsuario3
 WHERE empleado.usu='$id_doc' and persona.doc='$id_doc'");				
 		if($row=mysql_fetch_array($pa)){
 			$existe=TRUE;			$boton='Actualizar';	$deposito=$row['deposito_idDeposito3'];		

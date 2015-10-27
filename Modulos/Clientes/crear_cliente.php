@@ -12,13 +12,13 @@
 	$titulo='Registrar Cliente';			$existe=FALSE;	$boton='Registrar';  $persona='';
 	$doc='';				$nom='';		$ape='';		$fecha='';				$tel='';		$cel='';
 	$sexo='';				$dir='';		$nota='';		$estado='';				$cupo='0';		$correo='';	
-	if(!empty($_GET['doc'])){
-		$id_doc=limpiar($_GET['doc']);
+	
+  if(!empty($_GET['idDoc'])){
+		$id_doc=limpiar($_GET['idDoc']);
 		$id_doc=substr($id_doc,10);
 		$id_doc=decrypt($id_doc,'URLCODIGO');
-		echo $id_doc;
-		$pa=mysql_query("SELECT * FROM (persona p INNER JOIN empleado e ON p.idPersona=e.persona_idPersona) INNER JOIN cliente c ON c.persona_idPersona2=p.idPersona
-                    WHERE e.usu='$id_doc' and c.doc='$id_doc' and p.doc='$id_doc'");				
+		$pa=mysql_query("SELECT * FROM persona p INNER JOIN cliente c ON c.persona_idPersona2=p.idPersona
+          WHERE c.doc='$id_doc' and p.doc='$id_doc'");				
 		if($row=mysql_fetch_array($pa)){
 			$existe=TRUE;			$boton='Actualizar';		
 			$doc=$id_doc;			$nom=$row['nom'];		$ape=$row['ape']; $persona=$row['idPersona'];
@@ -201,7 +201,7 @@
                                   <input type="file" name="imagen"><br>
                                   <div class="well" style="max-width: 400px; margin: 0 auto 10px;">
                                   	<button type="submit" class="btn btn-large btn-block btn-primary"><?php echo $boton; ?></button>
-                                    <a href="crear_usuario.php" class="btn btn-large btn-block">Cancelar</a>
+                                    <a href="crear_cliente.php" class="btn btn-large btn-block">Cancelar</a>
                                   </div>
                                 </div>
                             </div>

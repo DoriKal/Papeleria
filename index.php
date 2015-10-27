@@ -85,7 +85,7 @@ WHERE e.usu='$usu' and e.con ='$con'");
 					$_SESSION['cod_user']=$usu;
             $_SESSION['idUser']=$row['idUsuario'];
 					if($row['tipo']=='a'){
-						echo mensajes('Bienvenido Admin<br>'.$row['nom'].' '.$row['ape'].'','verde').'<br>';
+						echo mensajes('Bienvenido Administrador:<br>'.$row['nom'].' '.$row['ape'].'','verde').'<br>';
 						echo '<center><img src="img/ajax-loader.gif"></center><br>';
 						echo '<meta http-equiv="refresh" content="2;url=Principal.php">';
 					}else{

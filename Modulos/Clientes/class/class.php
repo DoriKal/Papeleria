@@ -19,9 +19,9 @@ class Proceso_Cliente{
 		mysql_query("INSERT INTO persona (doc, nom, ape, fecha, tel, cel, sexo, dir, nota, fechar, estado, empresa_idEmpresa) VALUES 
 				('$doc','$nom','$ape','$fecha','$tel','$cel','$sexo','$dir','$nota','$fechar','$estado',1)");
 		$lastId = mysql_insert_id();
-		mysql_query("INSERT INTO empleado (usu, con, correo, fecha, tipo, persona_idPersona) VALUES ('$doc','$con','$correo','$fecha','c',$lastId)");
+		//mysql_query("INSERT INTO empleado (usu, con, correo, fecha, tipo, persona_idPersona) VALUES ('$doc','$con','$correo','$fecha','c',$lastId)");
 
-		mysql_query("INSERT INTO cliente (doc, cupo, puntos, persona_idPersona2) value ('$doc','$cupo','', $persona)");
+		mysql_query("INSERT INTO cliente (doc, cupo, puntos, persona_idPersona2) value ('$doc','$cupo','', $lastId)");
 	}
 	
 	function actualizar(){
@@ -31,7 +31,7 @@ class Proceso_Cliente{
 		
 		mysql_query("UPDATE persona SET nom='$nom', ape='$ape', fecha='$fecha', tel='$tel', cel='$cel', sexo='$sexo', dir='$dir',
 										nota='$nota', estado='$estado' WHERE doc='$doc'");
-		mysql_query("UPDATE empleado SET correo='$correo' WHERE usu='$doc'");
+		//mysql_query("UPDATE empleado SET correo='$correo' WHERE usu='$doc'");
 		mysql_query("UPDATE cliente SET cupo='$cupo' WHERE doc='$doc'");
 	}
 }

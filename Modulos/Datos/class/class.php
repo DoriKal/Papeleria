@@ -37,7 +37,7 @@ class Proceso_Departamento{
 	function crear(){
 		$id=$this->id;	$nombreDepartamento=$this->nombreDepartamento;	$estado=$this->estado; $empresa_idEmpresa1=$this->empresa_idEmpresa1;
 		
-		mysql_query("INSERT INTO departamento (nombreDepartamento, estado,empresa_idEmpresa1) VALUES ('$nombre','$estado',$empresa_idEmpresa1)");
+		mysql_query("INSERT INTO departamento (nombreDepartamento, estado,empresa_idEmpresa1) VALUES ('$nombreDepartamento','$estado',$empresa_idEmpresa1)");
 	}
 	
 	function actualizar(){
