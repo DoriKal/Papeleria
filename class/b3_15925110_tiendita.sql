@@ -1,32 +1,25 @@
--- phpMyAdmin SQL Dump
--- version 3.5.8.2
--- http://www.phpmyadmin.net
---
--- Servidor: sql206.byethost3.com
--- Tiempo de generación: 30-10-2015 a las 03:13:04
--- Versión del servidor: 5.6.25-73.1
--- Versión de PHP: 5.3.3
+/*
+Navicat MySQL Data Transfer
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
+Source Server         : Conexión Apache Alternativa
+Source Server Version : 50625
+Source Host           : 127.0.0.1:3306
+Source Database       : db_tienda
 
+Target Server Type    : MYSQL
+Target Server Version : 50625
+File Encoding         : 65001
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+Date: 2015-11-25 15:07:16
+*/
 
---
--- Base de datos: `b3_15925110_tiendita`
---
+SET FOREIGN_KEY_CHECKS=0;
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `articulo`
---
-
-CREATE TABLE IF NOT EXISTS `articulo` (
+-- ----------------------------
+-- Table structure for articulo
+-- ----------------------------
+DROP TABLE IF EXISTS `articulo`;
+CREATE TABLE `articulo` (
   `codigo` varchar(13) NOT NULL,
   `nombre` varchar(20) NOT NULL,
   `departamento_idDepartamento` int(11) NOT NULL,
@@ -52,43 +45,35 @@ CREATE TABLE IF NOT EXISTS `articulo` (
   KEY `departamento_idDepartamento` (`departamento_idDepartamento`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `articulo`
---
+-- ----------------------------
+-- Records of articulo
+-- ----------------------------
+INSERT INTO `articulo` VALUES ('LALA001', 'Lala Semidescremada', '1', '1', '1', 'A', '1', '1', '13.56', '0', '16', '15.5', '', '', '13.5', '13', '', '');
+INSERT INTO `articulo` VALUES ('COCA001', 'Refresco de Cola 2 L', '2', '1', '1', 'A', '1', '1', '18', '17', '15', '14', '', '', '12', '13', '', '');
+INSERT INTO `articulo` VALUES ('LALA002', 'Leche Deslactosada 1', '1', '1', '1', 'A', '1', '1', '0', '0', '17', '16.5', '', '', '15', '14', '', '');
 
-INSERT INTO `articulo` (`codigo`, `nombre`, `departamento_idDepartamento`, `unidad_idUnidad`, `ubicacion_idUbicacion`, `defecto`, `iva_ivacompra`, `iva_ivaventa`, `costo_prov`, `ocosto_prov`, `a_venta`, `b_venta`, `c_venta`, `d_venta`, `a_costo`, `b_costo`, `c_costo`, `d_costo`) VALUES
-('LALA001', 'Lala Semidescremada', 1, 1, 1, 'A', 1, 1, '13.56', '0', '16', '15.5', '', '', '13.5', '13', '', ''),
-('COCA001', 'Refresco de Cola 2 L', 2, 1, 1, 'A', 1, 1, '18', '17', '15', '14', '', '', '12', '13', '', ''),
-('LALA002', 'Leche Deslactosada 1', 1, 1, 1, 'A', 1, 1, '0', '0', '17', '16.5', '', '', '15', '14', '', '');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `cajero`
---
-
-CREATE TABLE IF NOT EXISTS `cajero` (
+-- ----------------------------
+-- Table structure for cajero
+-- ----------------------------
+DROP TABLE IF EXISTS `cajero`;
+CREATE TABLE `cajero` (
   `usuario_idUsuario3` int(11) NOT NULL,
   `deposito_idDeposito3` int(11) NOT NULL,
   KEY `usuario_idUsuario_idx` (`usuario_idUsuario3`),
   KEY `deposito_idDeposito_idx` (`deposito_idDeposito3`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `cajero`
---
+-- ----------------------------
+-- Records of cajero
+-- ----------------------------
+INSERT INTO `cajero` VALUES ('1', '1');
+INSERT INTO `cajero` VALUES ('2', '1');
 
-INSERT INTO `cajero` (`usuario_idUsuario3`, `deposito_idDeposito3`) VALUES
-(1, 1),
-(2, 1);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `cliente`
---
-
-CREATE TABLE IF NOT EXISTS `cliente` (
+-- ----------------------------
+-- Table structure for cliente
+-- ----------------------------
+DROP TABLE IF EXISTS `cliente`;
+CREATE TABLE `cliente` (
   `correo` varchar(45) DEFAULT NULL,
   `idCliente` int(11) NOT NULL AUTO_INCREMENT,
   `doc` varchar(20) NOT NULL,
@@ -97,45 +82,37 @@ CREATE TABLE IF NOT EXISTS `cliente` (
   `persona_idPersona2` int(11) DEFAULT NULL,
   PRIMARY KEY (`idCliente`),
   KEY `persona_idPersona2` (`persona_idPersona2`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `cliente`
---
+-- ----------------------------
+-- Records of cliente
+-- ----------------------------
+INSERT INTO `cliente` VALUES (null, '1', 'C001', '500', '', '3');
 
-INSERT INTO `cliente` (`correo`, `idCliente`, `doc`, `cupo`, `puntos`, `persona_idPersona2`) VALUES
-(NULL, 1, 'C001', '500', '', 3);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `departamento`
---
-
-CREATE TABLE IF NOT EXISTS `departamento` (
+-- ----------------------------
+-- Table structure for departamento
+-- ----------------------------
+DROP TABLE IF EXISTS `departamento`;
+CREATE TABLE `departamento` (
   `idDepartamento` int(11) NOT NULL AUTO_INCREMENT,
   `nombreDepartamento` varchar(30) NOT NULL,
   `estado` varchar(15) NOT NULL,
   `empresa_idEmpresa1` int(11) NOT NULL,
   PRIMARY KEY (`idDepartamento`),
   KEY `empresa_idEmpresa_idx` (`empresa_idEmpresa1`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `departamento`
---
+-- ----------------------------
+-- Records of departamento
+-- ----------------------------
+INSERT INTO `departamento` VALUES ('1', 'Lacteos', 's', '1');
+INSERT INTO `departamento` VALUES ('2', 'Refrescos', 's', '1');
 
-INSERT INTO `departamento` (`idDepartamento`, `nombreDepartamento`, `estado`, `empresa_idEmpresa1`) VALUES
-(1, 'Lacteos', 's', 1),
-(2, 'Refrescos', 's', 1);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `detalle`
---
-
-CREATE TABLE IF NOT EXISTS `detalle` (
+-- ----------------------------
+-- Table structure for detalle
+-- ----------------------------
+DROP TABLE IF EXISTS `detalle`;
+CREATE TABLE `detalle` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `articulo_codigo1` varchar(13) NOT NULL,
   `ref` varchar(45) NOT NULL,
@@ -144,38 +121,35 @@ CREATE TABLE IF NOT EXISTS `detalle` (
   PRIMARY KEY (`id`),
   KEY `articulo_codigo_idx` (`articulo_codigo1`),
   KEY `usuario_idUsuario_idx` (`usuario_idUsuario1`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
+-- ----------------------------
+-- Records of detalle
+-- ----------------------------
+INSERT INTO `detalle` VALUES ('1', '', '', '0', '0');
 
---
--- Estructura de tabla para la tabla `detalleprov`
---
-
-CREATE TABLE IF NOT EXISTS `detalleprov` (
+-- ----------------------------
+-- Table structure for detalleprov
+-- ----------------------------
+DROP TABLE IF EXISTS `detalleprov`;
+CREATE TABLE `detalleprov` (
   `idDetalleProveedor` int(11) NOT NULL AUTO_INCREMENT,
   `producto_codigo` int(11) NOT NULL,
   `proveedor_id` int(11) NOT NULL,
   PRIMARY KEY (`idDetalleProveedor`),
   KEY `proveedor_id` (`proveedor_id`),
   KEY `producto_codigo_idx` (`producto_codigo`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `detalleprov`
---
+-- ----------------------------
+-- Records of detalleprov
+-- ----------------------------
 
-INSERT INTO `detalleprov` (`idDetalleProveedor`, `producto_codigo`, `proveedor_id`) VALUES
-(1, 1, 1),
-(2, 0, 1);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `detalleventa`
---
-
-CREATE TABLE IF NOT EXISTS `detalleventa` (
+-- ----------------------------
+-- Table structure for detalleventa
+-- ----------------------------
+DROP TABLE IF EXISTS `detalleventa`;
+CREATE TABLE `detalleventa` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `factura` varchar(45) NOT NULL,
   `articulo_codigo2` int(13) NOT NULL,
@@ -185,26 +159,17 @@ CREATE TABLE IF NOT EXISTS `detalleventa` (
   PRIMARY KEY (`id`),
   KEY `articulo_codigo_idx` (`articulo_codigo2`),
   KEY `usuario_idUsuario_idx` (`usuario_idUsuario2`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `detalleventa`
---
+-- ----------------------------
+-- Records of detalleventa
+-- ----------------------------
 
-INSERT INTO `detalleventa` (`id`, `factura`, `articulo_codigo2`, `cant`, `fecha`, `usuario_idUsuario2`) VALUES
-(1, '100001', 1, 12, '2015-10-27', 1),
-(2, '100002', 1, 4, '2015-10-27', 2),
-(3, '100003', 1, 1, '2015-10-27', 2),
-(4, '100004', 1, 4, '2015-10-29', 1),
-(5, '100005', 1, 5, '2015-10-29', 1);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `empleado`
---
-
-CREATE TABLE IF NOT EXISTS `empleado` (
+-- ----------------------------
+-- Table structure for empleado
+-- ----------------------------
+DROP TABLE IF EXISTS `empleado`;
+CREATE TABLE `empleado` (
   `idUsuario` int(11) NOT NULL AUTO_INCREMENT,
   `usu` varchar(20) COLLATE utf8_swedish_ci NOT NULL,
   `con` varchar(10) COLLATE utf8_swedish_ci NOT NULL,
@@ -214,23 +179,19 @@ CREATE TABLE IF NOT EXISTS `empleado` (
   `persona_idPersona` int(11) DEFAULT NULL,
   PRIMARY KEY (`idUsuario`),
   KEY `persona_idPersona_idx` (`persona_idPersona`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
 
---
--- Volcado de datos para la tabla `empleado`
---
+-- ----------------------------
+-- Records of empleado
+-- ----------------------------
+INSERT INTO `empleado` VALUES ('1', 'administrador', '12345', 'madrid@gmail.com', '2014-11-05', 'a', '1');
+INSERT INTO `empleado` VALUES ('2', 'E001', '12345', 'evi_skorpion@hotmail', '2015-05-01', 'c', '2');
 
-INSERT INTO `empleado` (`idUsuario`, `usu`, `con`, `correo`, `fecha`, `tipo`, `persona_idPersona`) VALUES
-(1, 'administrador', '12345', 'madrid@gmail.com', '2014-11-05', 'a', 1),
-(2, 'E001', '12345', 'evi_skorpion@hotmail', '2015-05-01', 'c', 2);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `empresa`
---
-
-CREATE TABLE IF NOT EXISTS `empresa` (
+-- ----------------------------
+-- Table structure for empresa
+-- ----------------------------
+DROP TABLE IF EXISTS `empresa`;
+CREATE TABLE `empresa` (
   `idEmpresa` int(11) NOT NULL AUTO_INCREMENT,
   `empresa` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
   `nit` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
@@ -245,22 +206,18 @@ CREATE TABLE IF NOT EXISTS `empresa` (
   `moneda` varchar(22) COLLATE utf8_spanish_ci NOT NULL,
   `anno` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
   PRIMARY KEY (`idEmpresa`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
---
--- Volcado de datos para la tabla `empresa`
---
+-- ----------------------------
+-- Records of empresa
+-- ----------------------------
+INSERT INTO `empresa` VALUES ('1', 'La Tiendita', 'XAXX010101000', 'Av. Encanto #71 Col. El mirador CP ', 'México', 'Xalapa', '2225655', '91170', 'www.tiendita-encanto.com', 'encanto@gmail.com', '2015-10-26', 'Pesos', '');
 
-INSERT INTO `empresa` (`idEmpresa`, `empresa`, `nit`, `direccion`, `pais`, `ciudad`, `tel`, `fax`, `web`, `correo`, `fecha`, `moneda`, `anno`) VALUES
-(1, 'La Tiendita', 'XAXX010101000', 'Av. Encanto #71 Col. El mirador CP ', 'México', 'Xalapa', '2225655', '91170', 'www.tiendita-encanto.com', 'encanto@gmail.com', '2015-10-26', 'Pesos', '');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `factura`
---
-
-CREATE TABLE IF NOT EXISTS `factura` (
+-- ----------------------------
+-- Table structure for factura
+-- ----------------------------
+DROP TABLE IF EXISTS `factura`;
+CREATE TABLE `factura` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `factura` varchar(255) NOT NULL,
   `valor` varchar(255) NOT NULL,
@@ -269,57 +226,36 @@ CREATE TABLE IF NOT EXISTS `factura` (
   `idUsuario` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `idUsuario_idx` (`idUsuario`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `factura`
---
+-- ----------------------------
+-- Records of factura
+-- ----------------------------
 
-INSERT INTO `factura` (`id`, `factura`, `valor`, `fecha`, `estado`, `idUsuario`) VALUES
-(1, '100001', '192', '2015-10-27', 's', 1),
-(2, '100002', '64', '2015-10-27', 's', 2),
-(3, '100003', '16', '2015-10-27', 's', 2),
-(4, '100004', '64', '2015-10-29', 's', 1),
-(5, '100005', '80', '2015-10-29', 's', 1),
-(6, '100006', '48', '2015-10-29', 's', 1),
-(7, '100007', '46', '2015-10-29', 's', 1),
-(8, '100008', '282', '2015-10-29', 's', 1),
-(9, '100009', '282', '2015-10-29', 's', 1),
-(10, '100010', '330', '2015-10-29', 's', 1),
-(11, '100011', '480', '2015-10-29', 's', 1),
-(12, '100012', '330', '2015-10-29', 's', 1),
-(13, '100013', '48', '2015-10-29', 's', 1);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `iva`
---
-
-CREATE TABLE IF NOT EXISTS `iva` (
+-- ----------------------------
+-- Table structure for iva
+-- ----------------------------
+DROP TABLE IF EXISTS `iva`;
+CREATE TABLE `iva` (
   `idIva` int(11) NOT NULL AUTO_INCREMENT,
   `nombreIva` varchar(255) NOT NULL,
   `valor` varchar(255) NOT NULL,
   `estado` varchar(255) NOT NULL,
   PRIMARY KEY (`idIva`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `iva`
---
+-- ----------------------------
+-- Records of iva
+-- ----------------------------
+INSERT INTO `iva` VALUES ('1', 'Tasa 0', '0', 's');
+INSERT INTO `iva` VALUES ('2', 'IVA 16%', '16', 's');
+INSERT INTO `iva` VALUES ('3', 'IEPS', '23', 's');
 
-INSERT INTO `iva` (`idIva`, `nombreIva`, `valor`, `estado`) VALUES
-(1, 'Tasa 0', '0', 's'),
-(2, 'IVA 16%', '16', 's'),
-(3, 'IEPS', '23', 's');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `pedido`
---
-
-CREATE TABLE IF NOT EXISTS `pedido` (
+-- ----------------------------
+-- Table structure for pedido
+-- ----------------------------
+DROP TABLE IF EXISTS `pedido`;
+CREATE TABLE `pedido` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `deposito_idDeposito` int(11) NOT NULL,
   `articulo_codigo` varchar(13) NOT NULL,
@@ -328,24 +264,17 @@ CREATE TABLE IF NOT EXISTS `pedido` (
   PRIMARY KEY (`id`),
   KEY `deposito_idDeposito_idx` (`deposito_idDeposito`),
   KEY `articulo_codigo_idx` (`articulo_codigo`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `pedido`
---
+-- ----------------------------
+-- Records of pedido
+-- ----------------------------
 
-INSERT INTO `pedido` (`id`, `deposito_idDeposito`, `articulo_codigo`, `cant`, `minima`) VALUES
-(1, 1, 'LALA001', '19', '3'),
-(2, 1, 'COCA001', '19', '4'),
-(3, 1, 'LALA002', '19', '5');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `persona`
---
-
-CREATE TABLE IF NOT EXISTS `persona` (
+-- ----------------------------
+-- Table structure for persona
+-- ----------------------------
+DROP TABLE IF EXISTS `persona`;
+CREATE TABLE `persona` (
   `idPersona` int(11) NOT NULL AUTO_INCREMENT,
   `doc` varchar(30) COLLATE utf8_swedish_ci NOT NULL,
   `nom` varchar(25) COLLATE utf8_swedish_ci NOT NULL,
@@ -361,24 +290,20 @@ CREATE TABLE IF NOT EXISTS `persona` (
   `empresa_idEmpresa` int(11) NOT NULL,
   PRIMARY KEY (`idPersona`),
   KEY `empresa_idEmpresa` (`empresa_idEmpresa`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci AUTO_INCREMENT=4 ;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
 
---
--- Volcado de datos para la tabla `persona`
---
+-- ----------------------------
+-- Records of persona
+-- ----------------------------
+INSERT INTO `persona` VALUES ('1', 'administrador', 'Joaquin', 'Madrid', '2014-11-05', '2281813637', '823610444', 'm', 'Av. Principal #  71', 'mmmm', '2014-11-02', 's', '1');
+INSERT INTO `persona` VALUES ('2', 'E001', 'Público General', '     ', '2015-05-01', '', '', 'm', '    ', '', '2015-05-13', 's', '1');
+INSERT INTO `persona` VALUES ('3', 'C001', 'Eleazar', 'Fernandez Ramirez', '1990-01-01', '2288462124', '2288462124', 'm', 'Diana Laura', '', '2015-10-27', 's', '1');
 
-INSERT INTO `persona` (`idPersona`, `doc`, `nom`, `ape`, `fecha`, `tel`, `cel`, `sexo`, `dir`, `nota`, `fechar`, `estado`, `empresa_idEmpresa`) VALUES
-(1, 'administrador', 'Joaquin', 'Madrid', '2014-11-05', '2281813637', '823610444', 'm', 'Av. Principal #  71', 'mmmm', '2014-11-02', 's', 1),
-(2, 'E001', 'Público General', '     ', '2015-05-01', '', '', 'm', '    ', '', '2015-05-13', 's', 1),
-(3, 'C001', 'Eleazar', 'Fernandez Ramirez', '1990-01-01', '2288462124', '2288462124', 'm', 'Diana Laura', '', '2015-10-27', 's', 1);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `proveedor`
---
-
-CREATE TABLE IF NOT EXISTS `proveedor` (
+-- ----------------------------
+-- Table structure for proveedor
+-- ----------------------------
+DROP TABLE IF EXISTS `proveedor`;
+CREATE TABLE `proveedor` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(255) NOT NULL,
   `dir` varchar(255) NOT NULL,
@@ -387,22 +312,18 @@ CREATE TABLE IF NOT EXISTS `proveedor` (
   `nota` varchar(255) NOT NULL,
   `contacto` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `proveedor`
---
+-- ----------------------------
+-- Records of proveedor
+-- ----------------------------
+INSERT INTO `proveedor` VALUES ('1', 'Grupo Lala', 'Las Trancas', '2288968574', 'nestle.xal@gmail.com', 'Cada 3 días', 'Julian');
 
-INSERT INTO `proveedor` (`id`, `nombre`, `dir`, `tel`, `fax`, `nota`, `contacto`) VALUES
-(1, 'Grupo Lala', 'Las Trancas', '2288968574', 'nestle.xal@gmail.com', 'Cada 3 días', 'Julian');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `resumen`
---
-
-CREATE TABLE IF NOT EXISTS `resumen` (
+-- ----------------------------
+-- Table structure for resumen
+-- ----------------------------
+DROP TABLE IF EXISTS `resumen`;
+CREATE TABLE `resumen` (
   `idResumen` int(11) NOT NULL AUTO_INCREMENT,
   `corte` varchar(10) DEFAULT NULL,
   `concepto` varchar(150) DEFAULT NULL,
@@ -413,34 +334,17 @@ CREATE TABLE IF NOT EXISTS `resumen` (
   `estado` char(4) DEFAULT NULL,
   PRIMARY KEY (`idResumen`),
   KEY `user_idUsuario` (`user_idUsuario`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `resumen`
---
+-- ----------------------------
+-- Records of resumen
+-- ----------------------------
 
-INSERT INTO `resumen` (`idResumen`, `corte`, `concepto`, `valor`, `tipo`, `fecha`, `user_idUsuario`, `estado`) VALUES
-(1, '100001', 'Venta al Contado Factura: 100001 por Valor de $ 192.00', '192', 'Entrada', '2015-10-27', 1, 's'),
-(2, '100002', 'Venta al Contado Factura: 100002 por Valor de $ 64.00', '64', 'Entrada', '2015-10-27', 2, 's'),
-(3, '100003', 'Venta al Contado Factura: 100003 por Valor de $ 16.00', '16', 'Entrada', '2015-10-27', 2, 's'),
-(4, '100004', 'Venta al Contado Factura: 100004 por Valor de $ 64.00', '64', 'Entrada', '2015-10-29', 1, 's'),
-(5, '100005', 'Venta al Contado Factura: 100005 por Valor de $ 80.00', '80', 'Entrada', '2015-10-29', 1, 's'),
-(6, '100006', 'Venta al Contado Factura: 100006 por Valor de $ 48.00', '48', 'Entrada', '2015-10-29', 1, 's'),
-(7, '100007', 'Venta al Contado Factura: 100007 por Valor de $ 46.00', '46', 'Entrada', '2015-10-29', 1, 's'),
-(8, '100008', 'Venta al Contado Factura: 100008 por Valor de $ 282.00', '282', 'Entrada', '2015-10-29', 1, 's'),
-(9, '100009', 'Venta al Contado Factura: 100009 por Valor de $ 282.00', '282', 'Entrada', '2015-10-29', 1, 's'),
-(10, '100010', 'Venta al Contado Factura: 100010 por Valor de $ 330.00', '330', 'Entrada', '2015-10-29', 1, 's'),
-(11, '100011', 'Venta al Contado Factura: 100011 por Valor de $ 480.00', '480', 'Entrada', '2015-10-29', 1, 's'),
-(12, '100012', 'Venta al Contado Factura: 100012 por Valor de $ 330.00', '330', 'Entrada', '2015-10-29', 1, 's'),
-(13, '100013', 'Venta al Contado Factura: 100013 por Valor de $ 48.00', '48', 'Entrada', '2015-10-29', 1, 's');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `sucursal`
---
-
-CREATE TABLE IF NOT EXISTS `sucursal` (
+-- ----------------------------
+-- Table structure for sucursal
+-- ----------------------------
+DROP TABLE IF EXISTS `sucursal`;
+CREATE TABLE `sucursal` (
   `idDeposito` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(255) NOT NULL,
   `dir` varchar(255) NOT NULL,
@@ -448,60 +352,44 @@ CREATE TABLE IF NOT EXISTS `sucursal` (
   `encargado` varchar(255) NOT NULL,
   `estado` varchar(255) NOT NULL,
   PRIMARY KEY (`idDeposito`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `sucursal`
---
+-- ----------------------------
+-- Records of sucursal
+-- ----------------------------
+INSERT INTO `sucursal` VALUES ('1', 'Sucursal Uno', 'Encanto No. 12, Sumidero', '2288462124', 'Francisco', 's');
 
-INSERT INTO `sucursal` (`idDeposito`, `nombre`, `dir`, `tel`, `encargado`, `estado`) VALUES
-(1, 'Sucursal Uno', 'Encanto No. 12, Sumidero', '2288462124', 'Francisco', 's');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `ubicacion`
---
-
-CREATE TABLE IF NOT EXISTS `ubicacion` (
+-- ----------------------------
+-- Table structure for ubicacion
+-- ----------------------------
+DROP TABLE IF EXISTS `ubicacion`;
+CREATE TABLE `ubicacion` (
   `idUbicacion` int(11) NOT NULL AUTO_INCREMENT,
   `nombreUbicacion` varchar(255) NOT NULL,
   `estado` varchar(255) NOT NULL,
   PRIMARY KEY (`idUbicacion`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `ubicacion`
---
+-- ----------------------------
+-- Records of ubicacion
+-- ----------------------------
+INSERT INTO `ubicacion` VALUES ('1', 'Almacen Uno', 's');
+INSERT INTO `ubicacion` VALUES ('2', 'Almacen Dos', 's');
 
-INSERT INTO `ubicacion` (`idUbicacion`, `nombreUbicacion`, `estado`) VALUES
-(1, 'Mostrador', 's'),
-(2, 'Almacen', 's'),
-(3, 'Almacen Dos', 's');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `unidad`
---
-
-CREATE TABLE IF NOT EXISTS `unidad` (
+-- ----------------------------
+-- Table structure for unidad
+-- ----------------------------
+DROP TABLE IF EXISTS `unidad`;
+CREATE TABLE `unidad` (
   `idUnidad` int(11) NOT NULL AUTO_INCREMENT,
   `nombreUnidad` varchar(255) NOT NULL,
   `estado` varchar(255) NOT NULL,
   PRIMARY KEY (`idUnidad`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `unidad`
---
-
-INSERT INTO `unidad` (`idUnidad`, `nombreUnidad`, `estado`) VALUES
-(1, 'Pieza', 's'),
-(2, 'Litro', 's'),
-(3, 'Kilogramo', 's'),
-(4, 'N/A', 's');
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+-- ----------------------------
+-- Records of unidad
+-- ----------------------------
+INSERT INTO `unidad` VALUES ('1', 'Pieza', 's');
+INSERT INTO `unidad` VALUES ('2', 'N/A', 's');
+INSERT INTO `unidad` VALUES ('3', 'Kilogramo', 's');
