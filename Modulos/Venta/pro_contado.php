@@ -167,7 +167,7 @@
                                                 <td>
                                                     <center>
                                                     	<strong><?php echo $nombre_deposito; ?></strong><br>
-                                                        <img src="../../img/logo.jpg" width="80" height="80"><br>
+                                                        <img src="../../img/logo-tienda.png" width="80" height="80"><br>
                                                         <strong><?php echo $nombre_empresa; ?></strong><br>
                                                     </center>
                                                 </td>
@@ -216,18 +216,18 @@
 													}
 													
 													#########DESCONTAR INVENTARIO################################################################
-													$pwa=mysql_query("SELECT cant FROM pedido WHERE articulo_codigo = $codigo");				
+													$pwa=mysql_query("SELECT cant FROM pedido WHERE articulo_codigo = '$codigo'");				
 										       		if($roww=mysql_fetch_array($pwa)){
                                                         $existencia = $roww['cant'];	
 														$new_cant=$existencia-$cantidad;
 
 														mysql_query("UPDATE pedido SET cant=$new_cant 
-                                                        WHERE articulo_codigo=$codigo");
+                                                        WHERE articulo_codigo='$codigo'");
 													}
 													#############################################################################################
 
                                                     #########DETALLE DE LA VENTA################################################################
-                                                    $query=mysql_query("SELECT * FROM detalle d WHERE d.articulo_codigo1 = $codigo");             
+                                                    $query=mysql_query("SELECT * FROM detalle d WHERE d.articulo_codigo1 = '$codigo'");             
                                                     if($rowDetalle=mysql_fetch_array($query)){  
                                                         $articuloD=$rowDetalle['articulo_codigo1'];
                                                         $facturaD=$factura;

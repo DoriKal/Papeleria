@@ -51,7 +51,7 @@
                 echo '<img src="usuarios/defecto.png" width="200" height="200">';
             }
         ?>
-        <img src="img/digital.png"><br>
+        <img src="img/logo-tienda.png"><br>
         <h1 class="text-info">Bienvenido al Sistema <?php echo $Nombre; ?></h1><br>
 		<strong class="text-info"> * * * <?php echo usuario($_SESSION['tipo_user']); ?>  * * *  </strong>
     </DIV>

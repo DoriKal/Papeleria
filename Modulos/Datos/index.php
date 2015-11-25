@@ -42,46 +42,73 @@
           <tr>
             <td>
                 <div class="row-fluid">
-                    <div class="span4" align="center">
+                    <!-- <div class="span3" align="center">
                     	<table class="table-bordered" width="100%">
                         	<tr>
                             	<td>
                                 	<center>
                                         <h2>Impuestos </h2>
-                                        <img src="../../img/logo.png"><br><br>
+                                        <img src="../../img/logo-tienda.png"><br><br>
                                         <a class="btn btn-large" href="iva.php"><strong>Entrar</strong></a><br><br>
                                     </center>
                                 </td>
                             </tr>
                         </table>
-                    </div>
-                    <div class="span4" align="center">
+                    </div> -->
+                    <div class="span3" align="center">
                         <table class="table-bordered" width="100%">
                         	<tr>
                             	<td>
                                 	<center>
                                         <h2>Datos Empresa </h2>
-                                        <img src="../../img/logo.png"><br><br>
+                                        <img src="../../img/logo-tienda.png"><br><br>
                                         <a class="btn btn-large" href="empresa.php"><strong>Entrar</strong></a><br><br>
                                     </center>
                                 </td>
                             </tr>
                         </table>
                     </div>
-                    <div class="span4" align="center">
+                    <div class="span3" align="center">
                     	<table class="table-bordered" width="100%">
                         	<tr>
                             	<td>
                                 	<center>
-                                        <h2>Departamentos </h2>
-                                        <img src="../../img/logo.png"><br><br>
+                                        <h2>Clasificacion </h2>
+                                        <img src="../../img/logo-tienda.png"><br><br>
                                         <a class="btn btn-large" href="departamento.php"><strong>Entrar</strong></a><br><br>
                                     </center>
                                 </td>
                             </tr>
                         </table>
                     </div>
-                </div>    
+                
+                    <div class="span3" align="center">
+                        <table class="table-bordered" width="100%">
+                        	<tr>
+                            	<td>
+                                	<center>
+                                        <h2>Unidad/Tipo</h2>
+                                        <img src="../../img/logo-tienda.png"><br><br>
+                                        <a class="btn btn-large" href="unidad.php"><strong>Entrar</strong></a><br><br>
+                                    </center>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="span3" align="center">
+                    	<table class="table-bordered" width="100%">
+                        	<tr>
+                            	<td>
+                                	<center>
+                                        <h2>Ubicación </h2>
+                                        <img src="../../img/logo-tienda.png"><br><br>
+                                        <a class="btn btn-large" href="ubicacion.php"><strong>Entrar</strong></a><br><br>
+                                    </center>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>   
             </td>
           </tr>
         </table>

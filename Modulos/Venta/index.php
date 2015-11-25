@@ -151,16 +151,19 @@
                 	if(!empty($_POST['buscar'])){
 						$buscar=limpiar($_POST['buscar']);
 						$poa=mysql_query("SELECT a.codigo 
-FROM (articulo a INNER JOIN pedido p ON p.articulo_codigo=a.codigo) INNER JOIN sucursal s ON p.deposito_idDeposito=s.idDeposito
-WHERE s.idDeposito=$id_bodega and (a.codigo='$buscar' or a.nombre='$buscar') GROUP BY a.nombre");	
+                            FROM (articulo a INNER JOIN pedido p ON p.articulo_codigo=a.codigo) 
+                            INNER JOIN sucursal s ON p.deposito_idDeposito=s.idDeposito
+                            WHERE s.idDeposito=$id_bodega and (a.codigo='$buscar' or a.nombre='$buscar') 
+                            GROUP BY a.nombre");	
 						if($roow=mysql_fetch_array($poa)){
 							$codigo=$roow['codigo'];
+                            
 							$pa=mysql_query("SELECT * FROM detalle WHERE articulo_codigo1='$codigo' and usuario_idUsuario1=$usu and ref=''");	
 							if($row=mysql_fetch_array($pa)){
 								$cant=$row['cant']+1;
 								mysql_query("UPDATE detalle SET cant='$cant' WHERE articulo_codigo1='$codigo' and usuario_idUsuario1=$usu");
 							}else{
-								mysql_query("INSERT INTO detalle (articulo_codigo1, cant, usuario_idUsuario1) VALUES ('$codigo','1',$usu)");	
+								mysql_query("INSERT INTO detalle (articulo_codigo1,ref, cant, usuario_idUsuario1) VALUES ('$codigo','N/A','1',$usu)");	
 							}
 						}else{
 							echo mensajes('El Producto que Busca no se encuentra Registrado en la Base de Datos','rojo');	
@@ -182,8 +185,11 @@ WHERE s.idDeposito=$id_bodega and (a.codigo='$buscar' or a.nombre='$buscar') GRO
                             </tr>
                             <?php 
 								$neto=0;$item=0;
-                                $pa=mysql_query("SELECT * FROM ((detalle d INNER JOIN articulo a on d.articulo_codigo1=a.codigo) INNER JOIN empleado e ON d.usuario_idUsuario1=e.idUsuario) INNER JOIN iva i ON a.iva_ivaventa=i.idIva WHERE e.idUsuario=$usu");				
-                                while($row=mysql_fetch_array($pa)){
+                                $pa=mysql_query("SELECT * FROM ((detalle d 
+                                    INNER JOIN articulo a on d.articulo_codigo1=a.codigo) 
+                                    INNER JOIN empleado e ON d.usuario_idUsuario1=e.idUsuario) 
+                                    INNER JOIN iva i ON a.iva_ivaventa=i.idIva WHERE e.idUsuario=$usu");				
+                                    while($row=mysql_fetch_array($pa)){
 									$item=$item+$row['cant'];
 									##### CONSULTAR IVA ###################
 									$oIVA=new Consultar_IVA($row['idIva']);

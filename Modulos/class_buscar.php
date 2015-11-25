@@ -108,11 +108,12 @@ class Consultar_Producto{
 	
 	function __construct($codigo){
 		$this->consulta = 
-		mysql_query("SELECT * FROM (((articulo a LEFT JOIN iva i ON a.iva_ivacompra=i.idIva) 
-							INNER JOIN unidad u ON a.unidad_idUnidad=u.idUnidad) 
+		mysql_query("SELECT * FROM ((((articulo a LEFT JOIN iva i ON a.iva_ivacompra=i.idIva) 
+							INNER JOIN unidad u ON a.unidad_idUnidad=u.idUnidad)
+							LEFT JOIN ubicacion ub ON a.ubicacion_idUbicacion=ub.idUbicacion)
 							INNER JOIN departamento d ON a.departamento_idDepartamento=d.idDepartamento)
-							left JOIN pedido p ON p.articulo_codigo=a.codigo
-							WHERE codigo=$codigo or nombre='$codigo' or a_costo='$codigo'");
+							LEFT JOIN pedido p ON p.articulo_codigo=a.codigo
+							WHERE codigo = '$codigo' or nombre='$codigo' or a_costo='$codigo'");
 		$this->fetch = mysql_fetch_array($this->consulta);
 	}
 	
@@ -148,7 +149,32 @@ class Consultar_Sistema{
 		return $this->fetch[$campo];
 	}
 }
-
+class Consultar_Ubicacion{
+	private $consulta;
+	private $fetch;
+	
+	function __construct($codigo){
+		$this->consulta = mysql_query("SELECT * FROM ubicacion WHERE idUbicacion='$codigo' -- and bodega='$bodega'");
+		$this->fetch = mysql_fetch_array($this->consulta);
+	}
+	
+	function consultar($campo){
+		return $this->fetch[$campo];
+	}
+}
+class Consultar_Unidad{
+	private $consulta;
+	private $fetch;
+	
+	function __construct($codigo){
+		$this->consulta = mysql_query("SELECT * FROM unidad WHERE idUnidad='$codigo' -- and bodega='$bodega'");
+		$this->fetch = mysql_fetch_array($this->consulta);
+	}
+	
+	function consultar($campo){
+		return $this->fetch[$campo];
+	}
+}
 class Consultar_Contenido{
 	private $consulta;
 	private $fetch;

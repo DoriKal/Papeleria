@@ -66,7 +66,7 @@
 
     <div class="container">
 	  <form name="form1" method="post" action="" class="form-signin">
-      	<center><img src="img/digital.png" width="200" height="200"></center><br>
+      	<center><img src="img/logo-tienda.png" width="200" height="200"></center><br>
       	<?php 
 	  	if(!empty($_POST['usu']) and !empty($_POST['con'])){ 
 			$usu=limpiar($_POST['usu']);

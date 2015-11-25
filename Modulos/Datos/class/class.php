@@ -69,4 +69,42 @@ class Proceso_IVA{
 		mysql_query("UPDATE iva SET nombreIva='$nombre', valor='$valor', estado='$estado' WHERE idIva='$id'");
 	}
 }
+class Proceso_Ubicacion{
+	var $id;	var $nombre;		var $estado;	
+	
+	function __construct($id,$nombre,$estado){
+		$this->id=$id;		$this->nombre=$nombre;		$this->estado=$estado;
+	}
+	
+	function crear(){
+		$id=$this->id;		$nombre=$this->nombre;		$estado=$this->estado;
+		
+		mysql_query("INSERT INTO ubicacion (nombreUbicacion, estado) VALUES ('$nombre','$estado')");
+	}
+	
+	function actualizar(){
+		$id=$this->id;		$nombre=$this->nombre;		$estado=$this->estado;
+		
+		mysql_query("UPDATE ubicacion SET nombreUbicacion='$nombre', estado='$estado' WHERE idUbicacion='$id'");
+	}
+}
+class Proceso_Unidad{
+	var $id;	var $nombre;	var $estado;	
+	
+	function __construct($id,$nombre,$estado){
+		$this->id=$id;		$this->nombre=$nombre;	$this->estado=$estado;
+	}
+	
+	function crear(){
+		$id=$this->id;		$nombre=$this->nombre; 		$estado=$this->estado;
+		
+		mysql_query("INSERT INTO unidad (nombreUnidad,estado) VALUES ('$nombre','$estado')");
+	}
+	
+	function actualizar(){
+		$id=$this->id;		$nombre=$this->nombre;		$estado=$this->estado;
+		
+		mysql_query("UPDATE unidad SET nombreUnidad='$nombre', estado='$estado' WHERE idUnidad='$id'");
+	}
+}
 ?>

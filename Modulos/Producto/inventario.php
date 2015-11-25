@@ -94,9 +94,9 @@
 								}
 							?>
                         </select><br>
-                        <strong>Cantidad Actual</strong><br>
+                        <strong>Existencia</strong><br>
                       	<input type="number" name="cant" class="input-xlarge" value="1" min="1" autocomplete="off" required><br>
-                        <strong>Cantidad Mínima</strong><br>
+                        <strong>Stock Mínimo</strong><br>
                       	<input type="number" class="input-xlarge" name="minima" value="1" min="1" autocomplete="off" required><br>
                   </div>
                     <div class="modal-footer">
@@ -139,14 +139,14 @@
                         <table id="t01" class="table table-bordered table table-hover">
                           <tr class="well">
                             <td><center><strong>ID</strong></center></td>
-                            <td><strong>Deposito</strong></td>
-                            <td><center><strong>Cant. Actual</strong></center></td>
-                            <td><center><strong>Cant. Minima</strong></center></td>
-                            <td><div align="right"><strong>Valorado (Sin IVA)</strong></div></td>
+                            <td><strong>Almacen</strong></td>
+                            <td><center><strong>Existencia</strong></center></td>
+                            <td><center><strong>Stock Minimo</strong></center></td>
+                            <td><div align="right"><strong>Valorado Inventario</strong></div></td>
                             <td></td>
                           </tr>
                           <?php
-						  	$pa=mysql_query("SELECT * FROM pedido p INNER JOIN articulo a ON p.articulo_codigo=a.codigo WHERE articulo_codigo=$id_codigo");				
+						  	$pa=mysql_query("SELECT * FROM pedido p INNER JOIN articulo a ON p.articulo_codigo=a.codigo WHERE articulo_codigo = '$id_codigo'");				
 							while($row=mysql_fetch_array($pa)){
 								$oDepor=new Consultar_Deposito($row['deposito_idDeposito']);
 								$oProducto=new Consultar_Producto($row['articulo_codigo']);
@@ -177,7 +177,7 @@
                             </div>
                             <div class="modal-body">
 								<strong>Producto: </strong><?php echo $nombre_producto; ?><br><br>
-                        		<strong>Deposito: </strong><?php echo $oDepor->consultar('nombre'); ?><br><br>
+                        		<strong>Almacen: </strong><?php echo $oDepor->consultar('nombre'); ?><br><br>
                                 <strong>Cantidad Actual</strong><br>
                                 <input type="number" name="cant" class="input-xlarge" value="<?php echo $row['cant']; ?>" min="1" autocomplete="off" required><br>
                                 <strong>Cantidad Minima</strong><br>

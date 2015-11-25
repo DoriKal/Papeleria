@@ -9,43 +9,42 @@
 		header('Location: ../../php_cerrar.php');
 	}
 	if(!empty($_GET['id'])){
-		$id_depa=limpiar($_GET['id']);
-		$id_depa=substr($id_depa,10);
-		$id_depa=decrypt($id_depa,'URLCODIGO');
-		$oDepa=new Consultar_Departamento($id_depa);
-		if($oDepa->consultar("nombreDepartamento")==NULL){
-			header('Location: departamento.php');	
+		$id_ubicacion=limpiar($_GET['id']);
+		$id_ubicacion=substr($id_ubicacion,10);
+		$id_ubicacion=decrypt($id_ubicacion,'URLIVACODIGO');
+		
+		$oUbicacion=new Consultar_Ubicacion($id_ubicacion);
+    
+		if($oUbicacion->consultar("nombreUbicacion")==NULL){
+			header('Location: ubicacion.php');	
 		}else{
-			$titulo="Actualizar Clasificación";
-			$boton="Actualizar Clasificación";
-			$nombre_depa=$oDepa->consultar("nombreDepartamento");
-			$estado_depa=$oDepa->consultar("estado");
-      $idEmpresa=$oDepa->consultar("empresa_idEmpresa1");
-
+			$titulo="Actualizar Ubicación";
+			$boton="Actualizar Registro";
+			$nombre_ubicacion=$oUbicacion->consultar("nombreUbicacion");
+			$estado_ubicacion=$oUbicacion->consultar("estado");
 		}
 	}else{
 		
-		$pame=mysql_query("SELECT MAX(idDepartamento)as maximo FROM departamento");			
+		$pame=mysql_query("SELECT MAX(idUbicacion)as maximo FROM ubicacion");			
 		if($row=mysql_fetch_array($pame)){
 			if($row['maximo']==NULL){
-				$id_depa=1;
+				$id_ubicacion=1;
 			}else{
-				$id_depa=$row['maximo']+1;
+				$id_ubicacion=$row['maximo']+1;
 			}
 		}
-		$titulo="Ingresar Departamento Nuevo";	
+		$titulo="Ingresar Nueva Ubicación";	
 		$boton="Guardar Registro";
-		$nombre_depa='';
-		$valor_depa='';
-		$estado_depa='';
-    $idEmpresa='';
+		$nombre_ubicacion='';
+		$valor_ubicacion='';
+		$estado_ubicacion='';
 	}
 ?>
 <!DOCTYPE html>
 <html lang="es">
   <head>
     <meta charset="utf-8">
-    <title>Admin. Departamentos</title>
+    <title>Administrar IVA</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -76,29 +75,26 @@
             	<a href="index.php"><strong><i class="icon-fast-backward"></i> Regresar</strong></a>
             	<table class="table table-bordered">
                   <tr class="well">
-                    <td><h1 align="center">Administrar Clasificación</h1></td>
+                    <td><h1 align="center">Administrar Ubicación</h1></td>
                   </tr>
                 </table>
                 <?php 
-      					if(!empty($_POST['nombreDepartamento'])){
-      						$id=limpiar($_POST['idDepartamento']);
-      						$nombre=limpiar($_POST['nombreDepartamento']);
-      						$estado=limpiar($_POST['estado']);
-                  $idEmpresa=limpiar($_POST['idEmpresa']);
-                  print_r($id);
-      						$overty=new Consultar_Departamento($id);
-      						if($overty->consultar('nombreDepartamento')==NULL){
-      							$oGuardar=new Proceso_Departamento('',$nombre,$estado, $idEmpresa);
-      							$oGuardar->crear();
-      							echo mensajes('Departamento "'.$nombre.'" Registrado con Exito','verde');
-      						}else{
-      							$oActualizar=new Proceso_Departamento($id,$nombre,$estado, $idEmpresa);
-      							$oActualizar->actualizar();
-      							echo mensajes('Departamento "'.$nombre.'" Actualizado con Exito','verde');
-                    header('Location: departamento.php'); 
-      						}
-      					}
-      				?>
+					if(!empty($_POST['nombreUbicacion'])){
+						$id=limpiar($_POST['idUbicacion']);
+						$nombre=limpiar($_POST['nombreUbicacion']);
+						$estado=limpiar($_POST['estado']);
+						$overty=new Consultar_Ubicacion($id);
+						if($overty->consultar('nombreUbicacion')==NULL){
+							$oGuardar=new Proceso_Ubicacion('',$nombre,$estado);
+							$oGuardar->crear();
+							echo mensajes('Nueva Ubicación "'.$nombre.'" Registrado con Exito','verde');
+						}else{
+							$oActualizar=new Proceso_Ubicacion($id,$nombre,$estado);
+							$oActualizar->actualizar();
+							echo mensajes('Nueva Ubicación "'.$nombre.'" Actualizado con Exito','verde');
+						}
+					}
+				?>
                 <table class="table table-bordered">
                 	<tr>
                     	<td>
@@ -109,22 +105,20 @@
                                         <td><strong><center>ID</center></strong></td>
                                         <td><strong>Descripcion</strong></td>
                                         <td><strong><center>Status</center></strong></td>
-                                        <td><strong><center>Empresa</center></strong></td>
                                         <td><strong><center>Editar</center></strong></td>
                                       </tr>
                                       <?php
-                  									  	$pame=mysql_query("SELECT * from departamento d INNER JOIN empresa e ON e.idEmpresa=d.empresa_idEmpresa1  ORDER BY idDepartamento");			
-                  										while($row=mysql_fetch_array($pame)){
-                  											$url=cadenas().encrypt($row['idDepartamento'],'URLCODIGO');
-                  									  ?>
+									  	$pame=mysql_query("SELECT * FROM ubicacion ORDER BY nombreUbicacion");			
+										while($row=mysql_fetch_array($pame)){
+											$url=cadenas().encrypt($row['idUbicacion'],'URLIVACODIGO');
+									  ?>
                                       <tr>
-                                        <td><center><?php echo $row['idDepartamento']; ?></center></td>
-                                        <td><?php echo $row['nombreDepartamento']; ?></td>
+                                        <td><center><?php echo $row['idUbicacion']; ?></center></td>
+                                        <td><?php echo $row['nombreUbicacion']; ?></td>
                                         <td><center><?php echo estado($row['estado']); ?></center></td>
-                                        <td><center><?php echo $row['empresa_idEmpresa1']; ?></center></td>
                                         <td>
                                         	<center>
-                                                <a href="departamento.php?id=<?php echo $url; ?>" class="btn btn-mini">
+                                                <a href="ubicacion.php?id=<?php echo $url; ?>" class="btn btn-mini">
                                                     <i class="icon-edit"></i>
                                                 </a>
                                             </center>
@@ -143,29 +137,17 @@
                                         	<div align="center">
                                        	  	<form name="form1" method="post" action="">
                                             	<strong>Codigo</strong><br>
-                                                <input type="text" name="idDepartamento" value="<?php echo $id_depa; ?>" readonly autocomplete="off"><br>
+                                                <input type="text" name="idUbicacion" value="<?php echo $id_ubicacion; ?>" readonly autocomplete="off"><br>
                                                 <strong>Descripcion</strong><br>
-                                                <input type="text" name="nombreDepartamento" value="<?php echo $nombre_depa; ?>" required autocomplete="off"><br>
-                                                <strong>Empresa</strong><br>
-                                                <select name="idEmpresa">
-                                                  <?php $pa=mysql_query("SELECT * FROM empresa");        
-                                                      while($row=mysql_fetch_array($pa)){
-                                                        if($row['idEmpresa']==$idEmpresa){
-                                                          echo '<option value="'.$row['idEmpresa'].'" selected>'.$row['empresa'].'</option>'; 
-                                                        }else{
-                                                          echo '<option value="'.$row['idEmpresa'].'">'.$row['empresa'].'</option>';  
-                                                        }
-                                                      }
-                                                    ?>
-                                                </select><br>
+                                                <input type="text" name="nombreUbicacion" value="<?php echo $nombre_ubicacion; ?>" required autocomplete="off"><br>
                                                 <strong>Status</strong><br>
                                                 <select name="estado">
-                                                	<option value="s" <?php if($estado_depa=='s'){ echo 'selected'; } ?>>ACTIVO</option>
-                                                    <option value="n" <?php if($estado_depa=='n'){ echo 'selected'; } ?>>NO ACTIVO</option>
+                                                	<option value="s" <?php if($estado_ubicacion=='s'){ echo 'selected'; } ?>>ACTIVO</option>
+                                                    <option value="n" <?php if($estado_ubicacion=='n'){ echo 'selected'; } ?>>NO ACTIVO</option>
                                                 </select><br>
                                                 <div class="form-actions">
                                                   <button type="submit" class="btn btn-primary"><strong><?php echo $boton; ?></strong></button>
-                                                  <a href="departamento.php" class="btn"><strong>Cancelar</strong></a>
+                                                  <a href="ubicacion.php" class="btn"><strong>Cancelar</strong></a>
                                                 </div>
                                    	    	</form>
                                             </div>

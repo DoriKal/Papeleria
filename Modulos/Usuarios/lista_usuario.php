@@ -45,7 +45,7 @@
                   <tr class="well">
                     <td>
                     	<h1 align="center">
-                    		<img src="../../img/logo.png" width="100" height="100">
+                    		<img src="../../img/logo-tienda.png" width="100" height="100">
                     		Consultar Usuario Registrados
                     	</h1>
                         <center>

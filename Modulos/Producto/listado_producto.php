@@ -64,37 +64,60 @@
                   <strong>Crear Producto</strong></a>
                   <select class="btn" onchange="window.location=this.options[this.selectedIndex].value">
                       <option value="">Reporte de </option>
-                      <option value="http://localhost/papeleria/Modulos/Producto/reporte_producto.php">Articulos</option>
-                      <option value="http://localhost/papeleria/Modulos/Producto/reporte_producto_stock.php">Stock Mínimo</option>
+                      <option value="reporte_producto.php">Articulos</option>
+                      <option value="reporte_producto_stock.php">Stock Mínimo</option>
                   </select>
                 </div>
                 <br>
                 <table class="table table-bordered">
                   <tr class="well">
-                    <td><strong>Codigo</strong></td>
-                    <td nowrap><strong>Descripción</strong></td>
-                    <td nowrap><strong>Clasificación</strong></td>
-                    <td><strong>Impuesto </strong></td>
-                    <td><strong>Precio Compra</strong></td>
-                    <td nowrap><strong>Precio Venta </strong></td>
+                    <td><strong>Código</strong></td>
                     <td><strong>Existencia</strong></td>
+                    <td nowrap><strong>Nombre</strong></td>
+                    <td nowrap><strong>Unidad/Tipo</strong></td>
+                    <!-- <td><strong>Marca </strong></td> -->
+                    <td><strong>Ubicación</strong></td>
+                    <td nowrap><strong>Linea </strong></td>
+                    <td nowrap><strong>P. Venta </strong></td>
                     <td><strong>Stock mínimo</strong></td>
                     <td></td>
                   </tr>
                   <?php
 				  	        if(!empty($_POST['buscar'])){
-						          $buscar=limpiar($_POST['buscar']);
-						            $pame=mysql_query("SELECT * FROM articulo a LEFT JOIN pedido p ON a.codigo=p.articulo_codigo WHERE nombre LIKE '%$buscar%' or codigo='$buscar' ORDER BY codigo,nombre");	
+					            $buscar=limpiar($_POST['buscar']);
+					            $pame=mysql_query("SELECT * FROM articulo a LEFT JOIN pedido p ON a.codigo=p.articulo_codigo WHERE nombre LIKE '%$buscar%' or codigo='$buscar' ORDER BY codigo,nombre");	
 					          }else{
 						          $pame=mysql_query("SELECT * FROM articulo a LEFT JOIN pedido p ON a.codigo=p.articulo_codigo ORDER BY codigo,nombre");		
           					}		
           					while($row1=mysql_fetch_array($pame)){
-          						$url=cadenas().encrypt($row1['codigo'],'URLCODIGO');
-          				?>
-                  <?php if ($row1['cant'] <= $row1['minima']) { ?>
+          						$url=cadenas().encrypt($row1['codigo'],'URLCODIGO'); ?>
+                    <?php if ($row1['cant'] <= $row1['minima']) { ?>
                     <tr bgcolor="#D59898">
                       <td><center><?php echo $row1['codigo']; ?></center></td>
+                      <td ><?php echo strtoupper($row1['cant']); ?></td>
                       <td nowrap><?php echo strtoupper($row1['nombre']); ?></td>
+                      <td nowrap>
+                        <?php
+                        $idUnid = $row1['unidad_idUnidad'];
+                          $pa=mysql_query("SELECT * FROM unidad WHERE estado='s' AND idUnidad = $idUnid");       
+                            while($row=mysql_fetch_array($pa)){
+                            if($row['idUnidad']==$row1['unidad_idUnidad']){
+                              echo strtoupper($row['nombreUnidad']); 
+                            }
+                          }
+                        ?>
+                      </td>
+                      <td nowrap>
+                        <?php
+                        $idDepa = $row1['ubicacion_idUbicacion'];
+                          $pa=mysql_query("SELECT * FROM ubicacion WHERE estado='s' AND idUbicacion = $idDepa");       
+                            while($row=mysql_fetch_array($pa)){
+                            if($row['idUbicacion']==$row1['ubicacion_idUbicacion']){
+                              echo strtoupper($row['nombreUbicacion']); 
+                            }
+                          }
+                        ?>
+                      </td>
                       <td nowrap>
                         <?php
                         $idDepa = $row1['departamento_idDepartamento'];
@@ -106,22 +129,7 @@
                           }
                         ?>
                       </td>
-                      <td>
-                        <?php
-                          $idIva = $row1['iva_ivaventa'];
-                          $pa=mysql_query("SELECT * FROM iva WHERE estado='s' AND idIva=$idIva");        
-                                    while($row=mysql_fetch_array($pa)){
-                            if($row['idIva']==$idIva){
-                              echo strtoupper($row['nombreIva']); 
-                            }else{
-                              echo strtoupper($row['nombreIva']);  
-                            }
-                          }
-                        ?>
-                      </td>
-                      <td><center><?php echo "$ ".number_format($row1['a_costo'], 2, '.', ''); ?></center></td>
                       <td nowrap><center><?php echo "$ ".number_format($row1['a_venta'], 2, '.', ''); ?></center></td>
-                      <td><center><?php echo $row1['cant']; ?></center></td>
                       <td><center><?php echo $row1['minima']; ?></center></td>
                       <td>
                         <center>
@@ -134,7 +142,30 @@
                   <?php } else { ?>
                     <tr bgcolor="#F2F2F2">
                       <td><center><?php echo $row1['codigo']; ?></center></td>
+                      <td ><?php echo strtoupper($row1['cant']); ?></td>
                       <td nowrap><?php echo strtoupper($row1['nombre']); ?></td>
+                      <td nowrap>
+                        <?php
+                        $idUnid = $row1['unidad_idUnidad'];
+                          $pa=mysql_query("SELECT * FROM unidad WHERE estado='s' AND idUnidad = $idUnid");       
+                            while($row=mysql_fetch_array($pa)){
+                            if($row['idUnidad']==$row1['unidad_idUnidad']){
+                              echo strtoupper($row['nombreUnidad']); 
+                            }
+                          }
+                        ?>
+                      </td>
+                      <td nowrap>
+                        <?php
+                        $idDepa = $row1['ubicacion_idUbicacion'];
+                          $pa=mysql_query("SELECT * FROM ubicacion WHERE estado='s' AND idUbicacion = $idDepa");       
+                            while($row=mysql_fetch_array($pa)){
+                            if($row['idUbicacion']==$row1['ubicacion_idUbicacion']){
+                              echo strtoupper($row['nombreUbicacion']); 
+                            }
+                          }
+                        ?>
+                      </td>
                       <td nowrap>
                         <?php
                         $idDepa = $row1['departamento_idDepartamento'];
@@ -146,29 +177,14 @@
                           }
                         ?>
                       </td>
-                      <td>
-                        <?php
-                          $idIva = $row1['iva_ivaventa'];
-                          $pa=mysql_query("SELECT * FROM iva WHERE estado='s' AND idIva=$idIva");        
-                                    while($row=mysql_fetch_array($pa)){
-                            if($row['idIva']==$idIva){
-                              echo strtoupper($row['nombreIva']); 
-                            }else{
-                              echo strtoupper($row['nombreIva']);  
-                            }
-                          }
-                        ?>
-                      </td>
-                      <td><center><?php echo "$ ".number_format($row1['a_costo'], 2, '.', ''); ?></center></td>
                       <td nowrap><center><?php echo "$ ".number_format($row1['a_venta'], 2, '.', ''); ?></center></td>
-                      <td><center><?php echo $row1['cant']; ?></center></td>
                       <td><center><?php echo $row1['minima']; ?></center></td>
                       <td>
                         <center>
-                              <a class="btn btn-mini" href="crear_producto.php?codigo=<?php echo $url; ?>" title="Editar">
-                                  <i class="icon-edit"></i>
-                              </a>
-                          </center>
+                          <a class="btn btn-mini" href="crear_producto.php?codigo=<?php echo $url; ?>" title="Editar">
+                              <i class="icon-edit"></i>
+                          </a>
+                        </center>
                       </td>
                     </tr>
                   <?php } ?>

@@ -37,7 +37,7 @@
   <body>
     <?php include_once "../../menu/m_usuario.php"; ?>
     <DIV align="center">
-    <img src="../../img/digital.png"><br>
+    <img src="../../img/logo-tienda.png"><br>
     <h1 class="text-info">Modulo Usuarios</h1><br>
     
     <div class="row-fluid">

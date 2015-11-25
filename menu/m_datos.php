@@ -10,9 +10,11 @@
           <div class="nav-collapse collapse">
             <ul class="nav">
               <li><a href="../../Principal.php" style="color:#FFF">Inicio</a></li>
-              <li><a href="iva.php" style="color:#FFF">IVA</a></li>
+              <!-- <li><a href="iva.php" style="color:#FFF">IVA</a></li> -->
               <li><a href="Deposito.php" style="color:#FFF">Sucursales</a></li>
-              <li><a href="departamento.php" style="color:#FFF">Departamentos</a></li>
+              <li><a href="departamento.php" style="color:#FFF">Clasificación</a></li>
+              <li><a href="unidad.php" style="color:#FFF">Unidad/Tipo</a></li>
+              <li><a href="ubicacion.php" style="color:#FFF">Ubicacion</a></li>
               <li><a href="empresa.php" style="color:#FFF">Datos Empresa</a></li>
             </ul>
             <ul class="nav pull-right">

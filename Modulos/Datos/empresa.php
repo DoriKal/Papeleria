@@ -68,7 +68,7 @@
 					$tmpimagen = $_FILES['imagen']['tmp_name'];
 					$extimagen = pathinfo($nameimagen);
 					$ext = array("png","jpg");
-					$urlnueva = "../../img/logo.jpg";			
+					$urlnueva = "../../img/logo-tienda.png";			
 					if(is_uploaded_file($tmpimagen)){
 						if(array_search($extimagen['extension'],$ext)){
 							copy($tmpimagen,$urlnueva);	
@@ -91,7 +91,7 @@
                 <td>
                	    <div class="row-fluid">
 	                    <div class="span4" align="center">
-                        	<img src="../../img/logo.jpg" width="150" height="100">
+                        	<img src="../../img/logo-tienda.png" width="150" height="100">
                         </div>
     	                <div class="span8">
                     		<h1 align="center">Informacion Empresa</h1>
